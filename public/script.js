@@ -1,12 +1,14 @@
 // import { autocomplete } from '@algolia/autocomplete-js';
-
 // import '@algolia/autocomplete-theme-classic';
 const requestform = document.querySelector('form');
-const results = document.querySelector('#results')
-const seeds = document.querySelector('.seeds');
 requestform.addEventListener('submit', formSubmitted);
+const results = document.querySelector('#results');
+const seeds = document.querySelector('.seeds');
+const testButton = document.getElementById('test');
+testButton.addEventListener('click', pleaseWork);
+const sliders = document.querySelectorAll('input[type=range]');
 
-//on submit gather all final slider paramaters, the seeds, and GET from api
+//When form has been submitted, gather all final slider paramaters that have been touched, the seeds, send POST request
 function formSubmitted(event) {
   event.preventDefault();
   let params = [];
@@ -17,9 +19,9 @@ function formSubmitted(event) {
   getResults();
 }
 
-let sliders = document.querySelectorAll('input[type=range]');
-
+//add event listeners to the sliders to show the numbers as they are changed
 for (let i = 0; i < sliders.length; i++) {
+  //only want this to show up once its been changed, later on I will make it so that it is only a parameter when it has been changed
   sliders[i].addEventListener('change', function () {
     sliders[i].nextElementSibling.innerHTML = sliders[i].value
     // console.log(sliders[i].value);
@@ -33,22 +35,33 @@ for (let i = 0; i < sliders.length; i++) {
 // };
 
 let query = "https://api.spotify.com/v1/recommendations/?limit=10&market=ES&";
-
+//called upon submit, will gather all sliders that have been moved and the seeds and create a query to POST
 function getResults() {
   for (let i = 0; i < requestform.elements.length; i++) {
     query += '&' + requestform.elements[i].name + '=' + requestform.elements[i].value;
     // console.log(query)
   }
+  //why won't this post?
   fetch('/recommend', {
     method: 'POST',
     headers: {
-      'Content-Type': 'text/plain',
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify(query)
-  });
+  }).then(response => response.json()).then(console.log(response));
 }
 
-// }
+//testing post functionality
+function pleaseWork(){
+  console.log('clicked')
+  fetch('/recommend', {
+    method: 'POST',
+    header: {'Content-Type': 'application/json'},
+    body: {"name":"John", "age":30, "car":null},
+    }).then(response => console.log('it worked').catch(err => console.log))
+  }
+
+// Later will use autocomplete functions to show available artists and tracks
 // autocomplete({
 //   container: '#autocomplete',
 //   placeholder: 'Search for products',

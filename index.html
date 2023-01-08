@@ -13,30 +13,30 @@
   <h1 class="text-center my-5">Spotify Recommendation App</h1>
   <form class="container" action="" method="">
     <div class="row">
-      <label for="dance" class="form-label col-3 border text-center">Danceability</label>
+      <label for="dance" class="form-label col-3 border text-center mt-2">Danceability</label>
       <input name="danceability" id="danceability" type="range" class="form-range col-7" min="0" max="1"
         step=".01"><span></span>
     </div>
     <div class="row">
-      <label for="liveness" class="form-label col-3 border text-center">Liveness</label>
+      <label for="liveness" class="form-label col-3 border text-center mt-2">Liveness</label>
       <input name="liveness" id="liveness" type="range" class="form-range col-7" min="0" max="1"
         step=".01"><span></span>
     </div>
     <div class="row">
-      <label for="dance" class="form-label col-3 border text-center">Loudness</label>
+      <label for="dance" class="form-label col-3 border text-center mt-2">Loudness</label>
       <input name="loudness" id="loudness" type="range" class="form-range col-7" min="0" max="1"
         step=".01"><span></span>
     </div>
     <div class="row">
-      <label for="dance" class="form-label col-3 border text-center">Tempo</label>
-      <input name="tempo" id="tempo" type="range" class="form-range col-7" min="0" max="1" step=".01"><span></span>
+      <label for="dance" class="form-label col-3 border text-center mt-2">Tempo</label>
+      <input name="tempo" id="tempo" type="range" class="form-range col-7" min="0" max="1" step=".01"><span class="danger"></span>
     </div>
     <div class="row">
-      <label for="popularity" class="form-label col-3 border text-center">Popularity</label>
+      <label for="popularity" class="form-label col-3 border text-center mt-2">Popularity</label>
       <input name="popularity" id="popularity" type="range" class="form-range col-7" min="0" max="100" step="1">
       <span id="popdisplay"></span>
     </div>
-    <div class="input-group mb-3">
+    <div class="input-group mb-3 d-flex justify-content-center">
       <label class="input-group-text" for="inputGroupSelect01">Genre</label>
       <select name="genre" class="form-select seeds" id="inputgroup">
         <option value="acoustic">- Acoustic -</option>
@@ -300,7 +300,43 @@
     </div>
     <!-- <div id="autocomplete"><input type="text"></div> -->
   </form>
-  <div id="results"></div>
+  <div id="results" class="container">
+    <div class="row justify-content-between">
+    <div class="col-3">
+    <div class="card" style="width:20rem;"><img src="https://i.scdn.co/image/ab67616d00001e02c3621ade40aa029d9c157d4b" alt="album art" class="card-img-top">
+      <h5 class="card-title text-center">Song Displayed Here</h5>
+      <div class="flex-row">
+        <p class="card-text">The artists names will go here</p>
+        <p class="card-text">Release Date:</p>
+      <a href="spotify" class="btn btn-success">Listen on Spotify</a>
+      <a href="preview" class="btn btn-warning">Preview</a>
+    </div>
+  </div>
+    </div>
+    <div class="col-3">
+    <div class="card" style="width:20rem;"><img src="https://i.scdn.co/image/ab67616d00001e02c3621ade40aa029d9c157d4b" alt="album art" class="card-img-top">
+      <h5 class="card-title text-center">Song Displayed Here</h5>
+      <div class="flex-row">
+        <p class="card-text">The artists names will go here</p>
+        <p class="card-text">Release Date:</p>
+      <a href="spotify" class="btn btn-success">Listen on Spotify</a>
+      <a href="preview" class="btn btn-warning">Preview</a>
+    </div>
+  </div>
+    </div>
+    <div class="col-3">
+    <div class="card" style="width:20rem;"><img src="https://i.scdn.co/image/ab67616d00001e02c3621ade40aa029d9c157d4b" alt="album art" class="card-img-top">
+      <h5 class="card-title text-center">Song Displayed Here</h5>
+      <div class="flex-row">
+        <p class="card-text">The artists names will go here</p>
+        <p class="card-text">Release Date:</p>
+      <a href="spotify" class="btn btn-success">Listen on Spotify</a>
+      <a href="preview" class="btn btn-warning">Preview</a>
+    </div>
+  </div>
+    </div>
+  </div>
+</div>
   <script src="/script.js"></script>
 </body>
 

@@ -1,13 +1,12 @@
 
 const express = require("express");
-const app = express();
-var http = require('http');
 var request = require('request'); // "Request" librarynpm
 require("dotenv").config({ path: "./config/.env" })
+const bodyParser = require("body-parser");
+const app = express();
 
-// const bodyParser = require("body-parser");
-
-// app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false }))
 
 var client_id = '80af750695d24965b96b84c1b2b0665b'; // Your client id
 var client_secret = '6415a1e2f2c946fb85cd6d236d83d059'; // Your secret
@@ -41,18 +40,19 @@ request.post(authOptions, function (error, response, body) {
 
 app.post('/recommend', (req, res) => {
   console.log(tempToken)
-  console.log(req)
-  // let recommend = {
-  //   url: req.body,
-  //   headers: {
-  //     'Authorization': 'Bearer ' + tempToken
-  //   },
-  //   json: true
-  // }
-  // request.get(recommend, function(error, response, body) {
-  //           console.log(body)
-  //       });
-})
+  console.log(req.body)
+  let recommend = {
+    url: req.body,
+    headers: {
+      'Authorization': 'Bearer ' + tempToken
+    },
+    json: true
+  }
+  request.get(recommend, function(error, response, body) {
+    if (error) console.log(error)
+            console.log(body)
+        });
+});
 
 
 // request.post(authOptions, function(error, response, body) {
