@@ -29,17 +29,17 @@ var authOptions = {
 //receive access token as body.access_token
 var tempToken;
 
-request.post(authOptions, function(error, response, body) {
+request.post(authOptions, function (error, response, body) {
   if (error) console.log('initial authentication error')
-    if (!error && response.statusCode === 200) {
-      var token = body.access_token;
-      tempToken=body.access_token;
-      console.log(tempToken)
-      i = tempToken;
-    }
-  });
+  if (!error && response.statusCode === 200) {
+    var token = body.access_token;
+    tempToken = body.access_token;
+    console.log(tempToken)
+    i = tempToken;
+  }
+});
 
-app.post('/recommend', (req,res) => {
+app.post('/recommend', (req, res) => {
   console.log(tempToken)
   console.log(req)
   // let recommend = {
@@ -74,11 +74,10 @@ app.post('/recommend', (req,res) => {
 // });
 
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/index.html')
-  });
+  res.sendFile(__dirname + '/index.html')
+});
 
 app.listen(process.env.PORT, () => {
-    console.log(`Server is running on port ${process.env.PORT}, you better go catch it!`);
-  });
+  console.log(`Server is running on port ${process.env.PORT}, you better go catch it!`);
+});
 
-  
