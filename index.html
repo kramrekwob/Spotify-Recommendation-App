@@ -1,38 +1,304 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-  
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spotify Recommendation App</title>
+  <link href="https://bootswatch.com/4/lux/bootstrap.min.css" rel="stylesheet">
 </head>
+
 <body>
- <form class="container"  action="" method="GET">
- <div class="row">
- <label for="customRange2" class="form-label col-4">Danceability</label>
- <div class="col-8">
-<input type="range" class="form-range" min="0" max="1" step=".01" id="customRange2">
- </div>
-   </div>
- <div class="row">
-<label for="customRange3" class="form-label col-4">Popularity</label>
-<div class="col-8">
-<input type="range" class="form-range" min="0" max="5" step=".01" id="customRange2">
-   </div>
-   </div>
-<div class="input-group mb-3">
-<label class="input-group-text" for="inputGroupSelect01">Genre</label>
-  <select class="form-select" id="inputGroupSelect01">
-    <option selected>Choose...</option>
-    <option value="1">Hip Hop</option>
-    <option value="2">Country</option>
-    <option value="3">Jazz</option>
-  </select>
-  <div class="row">
-  <button type="submit" class="btn btn-primary col-12">Submit</button></div>
-</div>
+  <h1 class="text-center my-5">Spotify Recommendation App</h1>
+  <form class="container" action="" method="">
+    <div class="row">
+      <label for="dance" class="form-label col-3 border text-center">Danceability</label>
+        <input name= "danceability" id="danceability" type="range" class="form-range col-7" min="0" max="1" step=".01"><span></span>
+    </div>
+    <div class="row">
+      <label for="liveness" class="form-label col-3 border text-center">Liveness</label>
+        <input name="liveness" id="liveness" type="range" class="form-range col-7" min="0" max="1" step=".01"><span></span>
+    </div>
+    <div class="row">
+      <label for="dance" class="form-label col-3 border text-center">Loudness</label>
+        <input name="loudness" id="loudness" type="range" class="form-range col-7" min="0" max="1" step=".01"><span></span>
+    </div>
+    <div class="row">
+      <label for="dance" class="form-label col-3 border text-center">Tempo</label>
+        <input name="tempo" id="tempo" type="range" class="form-range col-7" min="0" max="1" step=".01"><span></span>
+    </div>
+    <div class="row">
+      <label for="popularity" class="form-label col-3 border text-center">Popularity</label>
+        <input name="popularity" id="popularity" type="range" class="form-range col-7" min="0" max="100" step="1">
+        <span id="popdisplay"></span>
+    </div>
+    <div class="input-group mb-3">
+      <label class="input-group-text" for="inputGroupSelect01">Genre</label>
+      <select name="genre" class="form-select seeds" id="inputgroup">
+        <option value="acoustic">- Acoustic -</option>
+        <option value="afrobeat">- Afrobeat -</option>
+        <option value="alt-rock">- Alt-rock -</option>
+        <option value="alternative">- Alternative -</option>
+        <option value="ambient">- Ambient -</option>
+        <option value="anime">- Anime -</option>
+        <option value="black-metal">- Black-metal -</option>
+        <option value="bluegrass">- Bluegrass -</option>
+        <option value="blues">- Blues -</option>
+        <option value="bossanova">- Bossanova -</option>
+        <option value="brazil">- Brazil -</option>
+        <option value="breakbeat">- Breakbeat -</option>
+        <option value="british">- British -</option>
+        <option value="cantopop">- Cantopop -</option>
+        <option value="chicago-house">- Chicago-house -</option>
+        <option value="children">- Children -</option>
+        <option value="chill">- Chill -</option>
+        <option value="classical">- Classical -</option>
+        <option value="club">- Club -</option>
+        <option value="comedy">- Comedy -</option>
+        <option value="country">- Country -</option>
+        <option value="dance">- Dance -</option>
+        <option value="dancehall">- Dancehall -</option>
+        <option value="death-metal">- Death-metal -</option>
+        <option value="deep-house">- Deep-house -</option>
+        <option value="detroit-techno">- Detroit-techno -</option>
+        <option value="disco">- Disco -</option>
+        <option value="disney">- Disney -</option>
+        <option value="drum-and-bass">- Drum-and-bass -</option>
+        <option value="dub">- Dub -</option>
+        <option value="dubstep">- Dubstep -</option>
+        <option value="edm">- Edm -</option>
+        <option value="electro">- Electro -</option>
+        <option value="electronic">- Electronic -</option>
+        <option value="emo">- Emo -</option>
+        <option value="folk">- Folk -</option>
+        <option value="forro">- Forro -</option>
+        <option value="french">- French -</option>
+        <option value="funk">- Funk -</option>
+        <option value="garage">- Garage -</option>
+        <option value="german">- German -</option>
+        <option value="gospel">- Gospel -</option>
+        <option value="goth">- Goth -</option>
+        <option value="grindcore">- Grindcore -</option>
+        <option value="groove">- Groove -</option>
+        <option value="grunge">- Grunge -</option>
+        <option value="guitar">- Guitar -</option>
+        <option value="happy">- Happy -</option>
+        <option value="hard-rock">- Hard-rock -</option>
+        <option value="hardcore">- Hardcore -</option>
+        <option value="hardstyle">- Hardstyle -</option>
+        <option value="heavy-metal">- Heavy-metal -</option>
+        <option value="hip-hop">- Hip-hop -</option>
+        <option value="holidays">- Holidays -</option>
+        <option value="honky-tonk">- Honky-tonk -</option>
+        <option value="house">- House -</option>
+        <option value="idm">- Idm -</option>
+        <option value="indian">- Indian -</option>
+        <option value="indie">- Indie -</option>
+        <option value="indie-pop">- Indie-pop -</option>
+        <option value="industrial">- Industrial -</option>
+        <option value="iranian">- Iranian -</option>
+        <option value="j-dance">- J-dance -</option>
+        <option value="j-idol">- J-idol -</option>
+        <option value="j-pop">- J-pop -</option>
+        <option value="j-rock">- J-rock -</option>
+        <option value="jazz">- Jazz -</option>
+        <option value="k-pop">- K-pop -</option>
+        <option value="kids">- Kids -</option>
+        <option value="latin">- Latin -</option>
+        <option value="latino">- Latino -</option>
+        <option value="malay">- Malay -</option>
+        <option value="mandopop">- Mandopop -</option>
+        <option value="metal">- Metal -</option>
+        <option value="metal-misc">- Metal-misc -</option>
+        <option value="metalcore">- Metalcore -</option>
+        <option value="minimal-techno">- Minimal-techno -</option>
+        <option value="movies">- Movies -</option>
+        <option value="mpb">- Mpb -</option>
+        <option value="new-age">- New-age -</option>
+        <option value="new-release">- New-release -</option>
+        <option value="opera">- Opera -</option>
+        <option value="pagode">- Pagode -</option>
+        <option value="party">- Party -</option>
+        <option value="philippines-opm">- Philippines-opm -</option>
+        <option value="piano">- Piano -</option>
+        <option value="pop">- Pop -</option>
+        <option value="pop-film">- Pop-film -</option>
+        <option value="post-dubstep">- Post-dubstep -</option>
+        <option value="power-pop">- Power-pop -</option>
+        <option value="progressive-house">- Progressive-house -</option>
+        <option value="psych-rock">- Psych-rock -</option>
+        <option value="punk">- Punk -</option>
+        <option value="punk-rock">- Punk-rock -</option>
+        <option value="r-n-b">- R-n-b -</option>
+        <option value="rainy-day">- Rainy-day -</option>
+        <option value="reggae">- Reggae -</option>
+        <option value="reggaeton">- Reggaeton -</option>
+        <option value="road-trip">- Road-trip -</option>
+        <option value="rock-n-roll">- Rock-n-roll -</option>
+        <option value="rockabilly">- Rockabilly -</option>
+        <option value="romance">- Romance -</option>
+        <option value="sad">- Sad -</option>
+        <option value="salsa">- Salsa -</option>
+        <option value="samba">- Samba -</option>
+        <option value="sertanejo">- Sertanejo -</option>
+        <option value="show-tunes">- Show-tunes -</option>
+        <option value="singer-songwriter">- Singer-songwriter -</option>
+        <option value="ska">- Ska -</option>
+        <option value="sleep">- Sleep -</option>
+        <option value="songwriter">- Songwriter -</option>
+        <option value="soul">- Soul -</option>
+        <option value="soundtracks">- Soundtracks -</option>
+        <option value="spanish">- Spanish -</option>
+        <option value="study">- Study -</option>
+        <option value="summer">- Summer -</option>
+        <option value="swedish">- Swedish -</option>
+        <option value="synth-pop">- Synth-pop -</option>
+        <option value="tango">- Tango -</option>
+        <option value="techno">- Techno -</option>
+        <option value="trance">- Trance -</option>
+        <option value="trip-hop">- Trip-hop -</option>
+        <option value="turkish">- Turkish -</option>
+        <option value="work-out">- Work-out -</option>
+        <option value="world-music">- World-music -</option>
+
+      </select>
+      <select name="genre" class="form-select seeds" id="inputGroupSelect01">
+        <option value="acoustic">- Acoustic -</option>
+        <option value="afrobeat">- Afrobeat -</option>
+        <option value="alt-rock">- Alt-rock -</option>
+        <option value="alternative">- Alternative -</option>
+        <option value="ambient">- Ambient -</option>
+        <option value="anime">- Anime -</option>
+        <option value="black-metal">- Black-metal -</option>
+        <option value="bluegrass">- Bluegrass -</option>
+        <option value="blues">- Blues -</option>
+        <option value="bossanova">- Bossanova -</option>
+        <option value="brazil">- Brazil -</option>
+        <option value="breakbeat">- Breakbeat -</option>
+        <option value="british">- British -</option>
+        <option value="cantopop">- Cantopop -</option>
+        <option value="chicago-house">- Chicago-house -</option>
+        <option value="children">- Children -</option>
+        <option value="chill">- Chill -</option>
+        <option value="classical">- Classical -</option>
+        <option value="club">- Club -</option>
+        <option value="comedy">- Comedy -</option>
+        <option value="country">- Country -</option>
+        <option value="dance">- Dance -</option>
+        <option value="dancehall">- Dancehall -</option>
+        <option value="death-metal">- Death-metal -</option>
+        <option value="deep-house">- Deep-house -</option>
+        <option value="detroit-techno">- Detroit-techno -</option>
+        <option value="disco">- Disco -</option>
+        <option value="disney">- Disney -</option>
+        <option value="drum-and-bass">- Drum-and-bass -</option>
+        <option value="dub">- Dub -</option>
+        <option value="dubstep">- Dubstep -</option>
+        <option value="edm">- Edm -</option>
+        <option value="electro">- Electro -</option>
+        <option value="electronic">- Electronic -</option>
+        <option value="emo">- Emo -</option>
+        <option value="folk">- Folk -</option>
+        <option value="forro">- Forro -</option>
+        <option value="french">- French -</option>
+        <option value="funk">- Funk -</option>
+        <option value="garage">- Garage -</option>
+        <option value="german">- German -</option>
+        <option value="gospel">- Gospel -</option>
+        <option value="goth">- Goth -</option>
+        <option value="grindcore">- Grindcore -</option>
+        <option value="groove">- Groove -</option>
+        <option value="grunge">- Grunge -</option>
+        <option value="guitar">- Guitar -</option>
+        <option value="happy">- Happy -</option>
+        <option value="hard-rock">- Hard-rock -</option>
+        <option value="hardcore">- Hardcore -</option>
+        <option value="hardstyle">- Hardstyle -</option>
+        <option value="heavy-metal">- Heavy-metal -</option>
+        <option value="hip-hop">- Hip-hop -</option>
+        <option value="holidays">- Holidays -</option>
+        <option value="honky-tonk">- Honky-tonk -</option>
+        <option value="house">- House -</option>
+        <option value="idm">- Idm -</option>
+        <option value="indian">- Indian -</option>
+        <option value="indie">- Indie -</option>
+        <option value="indie-pop">- Indie-pop -</option>
+        <option value="industrial">- Industrial -</option>
+        <option value="iranian">- Iranian -</option>
+        <option value="j-dance">- J-dance -</option>
+        <option value="j-idol">- J-idol -</option>
+        <option value="j-pop">- J-pop -</option>
+        <option value="j-rock">- J-rock -</option>
+        <option value="jazz">- Jazz -</option>
+        <option value="k-pop">- K-pop -</option>
+        <option value="kids">- Kids -</option>
+        <option value="latin">- Latin -</option>
+        <option value="latino">- Latino -</option>
+        <option value="malay">- Malay -</option>
+        <option value="mandopop">- Mandopop -</option>
+        <option value="metal">- Metal -</option>
+        <option value="metal-misc">- Metal-misc -</option>
+        <option value="metalcore">- Metalcore -</option>
+        <option value="minimal-techno">- Minimal-techno -</option>
+        <option value="movies">- Movies -</option>
+        <option value="mpb">- Mpb -</option>
+        <option value="new-age">- New-age -</option>
+        <option value="new-release">- New-release -</option>
+        <option value="opera">- Opera -</option>
+        <option value="pagode">- Pagode -</option>
+        <option value="party">- Party -</option>
+        <option value="philippines-opm">- Philippines-opm -</option>
+        <option value="piano">- Piano -</option>
+        <option value="pop">- Pop -</option>
+        <option value="pop-film">- Pop-film -</option>
+        <option value="post-dubstep">- Post-dubstep -</option>
+        <option value="power-pop">- Power-pop -</option>
+        <option value="progressive-house">- Progressive-house -</option>
+        <option value="psych-rock">- Psych-rock -</option>
+        <option value="punk">- Punk -</option>
+        <option value="punk-rock">- Punk-rock -</option>
+        <option value="r-n-b">- R-n-b -</option>
+        <option value="rainy-day">- Rainy-day -</option>
+        <option value="reggae">- Reggae -</option>
+        <option value="reggaeton">- Reggaeton -</option>
+        <option value="road-trip">- Road-trip -</option>
+        <option value="rock-n-roll">- Rock-n-roll -</option>
+        <option value="rockabilly">- Rockabilly -</option>
+        <option value="romance">- Romance -</option>
+        <option value="sad">- Sad -</option>
+        <option value="salsa">- Salsa -</option>
+        <option value="samba">- Samba -</option>
+        <option value="sertanejo">- Sertanejo -</option>
+        <option value="show-tunes">- Show-tunes -</option>
+        <option value="singer-songwriter">- Singer-songwriter -</option>
+        <option value="ska">- Ska -</option>
+        <option value="sleep">- Sleep -</option>
+        <option value="songwriter">- Songwriter -</option>
+        <option value="soul">- Soul -</option>
+        <option value="soundtracks">- Soundtracks -</option>
+        <option value="spanish">- Spanish -</option>
+        <option value="study">- Study -</option>
+        <option value="summer">- Summer -</option>
+        <option value="swedish">- Swedish -</option>
+        <option value="synth-pop">- Synth-pop -</option>
+        <option value="tango">- Tango -</option>
+        <option value="techno">- Techno -</option>
+        <option value="trance">- Trance -</option>
+        <option value="trip-hop">- Trip-hop -</option>
+        <option value="turkish">- Turkish -</option>
+        <option value="work-out">- Work-out -</option>
+        <option value="world-music">- World-music -</option>
+
+      </select>
+      <div class="row">
+        <button type="submit" class="btn btn-primary col-12">Submit</button>
+      </div>
+    </div>
+    <!-- <div id="autocomplete"><input type="text"></div> -->
   </form>
+  <div id="results"></div>
+  <script src="/script.js"></script>
 </body>
+
 </html>
