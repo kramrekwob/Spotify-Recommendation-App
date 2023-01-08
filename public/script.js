@@ -4,8 +4,6 @@ const requestform = document.querySelector('form');
 requestform.addEventListener('submit', formSubmitted);
 const results = document.querySelector('#results');
 const seeds = document.querySelector('.seeds');
-const testButton = document.getElementById('test');
-testButton.addEventListener('click', pleaseWork);
 const sliders = document.querySelectorAll('input[type=range]');
 
 //When form has been submitted, gather all final slider paramaters that have been touched, the seeds, send POST request
@@ -34,7 +32,8 @@ for (let i = 0; i < sliders.length; i++) {
 //   document.getElementById("popdisplay").innerHTML = this.value;
 // };
 
-let query = "https://api.spotify.com/v1/recommendations/?limit=10&market=ES&";
+var query = "https://api.spotify.com/v1/recommendations/?limit=10&market=ES";
+
 //called upon submit, will gather all sliders that have been moved and the seeds and create a query to POST
 function getResults() {
   for (let i = 0; i < requestform.elements.length; i++) {
@@ -47,19 +46,10 @@ function getResults() {
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(query)
+    body: JSON.stringify({query})
   }).then(response => response.json()).then(console.log(response));
 }
 
-//testing post functionality
-function pleaseWork(){
-  console.log('clicked')
-  fetch('/recommend', {
-    method: 'POST',
-    header: {'Content-Type': 'application/json'},
-    body: {"name":"John", "age":30, "car":null},
-    }).then(response => console.log('it worked').catch(err => console.log))
-  }
 
 // Later will use autocomplete functions to show available artists and tracks
 // autocomplete({
