@@ -42,18 +42,24 @@ app.post('/recommend', (req, res) => {
   console.log(tempToken)
   console.log(req.body)
   let recommend = {
-    url: req.body,
+    url: req.body.query,
     headers: {
       'Authorization': 'Bearer ' + tempToken
     },
     json: true
   }
+  let payload = ''
   request.get(recommend, function(error, response, body) {
-    if (error) console.log(error)
-            console.log(body)
+    console.log(body)
+    if (error) console.log('error retrieving info from spotify')
+    for (let tracks in body.tracks){
+      payload+=tracks.name;
+    }
+    console.log(payload)
         });
+  res.send(payload)
 });
-
+https://api.spotify.com/v1/recommendations?limit=10&market=ES&seed_artists=4NHQUGzhtTLFvgF5SZesLK&seed_genres=classical%2Ccountry&seed_tracks=0c6xIDDpzE81m2q797ordA" -H "Accept: application/json" -H "Content-Type: application/json" -H "Authorization: Bearer BQDxnZWxR0hIvWLafT4REzWXBTi4Ciy9l7fvmr62jENG3K24Nl7FlKF3Nz5ubBKJQreF0sJ-5naaRUyXbU33b6EvhjjTbYoDE_ehjdVKNOfkIO_f8O1mBH2U0zw6tG45H1BNsaNWqLj19MIf7e1gYq3FkcuT1LKzDAZN0Zd2EOktxBU9
 
 // request.post(authOptions, function(error, response, body) {
 //   if (!error && response.statusCode === 200) {

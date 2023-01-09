@@ -11,34 +11,34 @@
 
 <body>
   <h1 class="text-center my-5">Spotify Recommendation App</h1>
-  <form class="container" action="" method="">
+  <form class="container" action="" method="" id="mainform">
     <div class="row">
       <label for="dance" class="form-label col-3 border text-center mt-2">Danceability</label>
-      <input name="danceability" id="danceability" type="range" class="form-range col-7" min="0" max="1"
+      <input name="danceability" id="danceability" type="range" class="form-range col-7 parameter" min="0" max="1"
         step=".01"><span></span>
     </div>
     <div class="row">
       <label for="liveness" class="form-label col-3 border text-center mt-2">Liveness</label>
-      <input name="liveness" id="liveness" type="range" class="form-range col-7" min="0" max="1"
+      <input name="liveness" id="liveness" type="range" class="form-range col-7 parameter" min="0" max="1"
         step=".01"><span></span>
     </div>
     <div class="row">
       <label for="dance" class="form-label col-3 border text-center mt-2">Loudness</label>
-      <input name="loudness" id="loudness" type="range" class="form-range col-7" min="0" max="1"
+      <input name="loudness" id="loudness" type="range" class="form-range col-7 parameter" min="0" max="1"
         step=".01"><span></span>
     </div>
     <div class="row">
       <label for="dance" class="form-label col-3 border text-center mt-2">Tempo</label>
-      <input name="tempo" id="tempo" type="range" class="form-range col-7" min="0" max="1" step=".01"><span class="danger"></span>
+      <input name="tempo" id="tempo" type="range" class="form-range col-7 parameter" min="0" max="1" step=".01"><span class="danger"></span>
     </div>
     <div class="row">
       <label for="popularity" class="form-label col-3 border text-center mt-2">Popularity</label>
-      <input name="popularity" id="popularity" type="range" class="form-range col-7" min="0" max="100" step="1">
+      <input name="popularity" id="popularity" type="range" class="form-range col-7 parameter" min="0" max="100" step="1">
       <span id="popdisplay"></span>
     </div>
     <div class="input-group mb-3 d-flex justify-content-center">
       <label class="input-group-text" for="inputGroupSelect01">Genre</label>
-      <select name="genre" class="form-select seeds" id="inputgroup">
+      <select name="seed_genres" class="form-select seeds parameter" id="inputgroup">
         <option value="acoustic">- Acoustic -</option>
         <option value="afrobeat">- Afrobeat -</option>
         <option value="alt-rock">- Alt-rock -</option>
@@ -166,7 +166,7 @@
         <option value="world-music">- World-music -</option>
 
       </select>
-      <select name="genre" class="form-select seeds" id="inputGroupSelect01">
+      <select name="seed_genres" class="form-select seeds parameter" id="inputGroupSelect01">
         <option value="acoustic">- Acoustic -</option>
         <option value="afrobeat">- Afrobeat -</option>
         <option value="alt-rock">- Alt-rock -</option>
@@ -295,7 +295,7 @@
 
       </select>
       <div class="row">
-        <button type="submit" class="btn btn-primary col-12">Submit</button>
+        <button type="submit" class="btn btn-primary col-12" id="submit">Submit</button>
       </div>
     </div>
     <!-- <div id="autocomplete"><input type="text"></div> -->
