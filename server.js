@@ -55,9 +55,10 @@ app.post('/recommend', (req, res) => {
       let thisSong = [];
       thisSong.push(body.tracks[i].name);
       thisSong.push(body.tracks[i].album.images);
-      thisSong.push(body.tracks[i].album.releaseDate, body.tracks[i].album.name)
       thisSong.push(body.tracks[i].artists);
-      thisSong.push(body.tracks[i].external_urls.spotify)
+      thisSong.push(body.tracks[i].album.name);
+      thisSong.push(body.tracks[i].album.release_date);
+      thisSong.push(body.tracks[i].external_urls.spotify);
       thisSong.push(body.tracks[i].preview_url)
       payload[body.tracks[i].name] = thisSong;
     }

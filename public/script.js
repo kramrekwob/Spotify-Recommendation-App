@@ -33,7 +33,7 @@ for (let i = 0; i < sliders.length; i++) {
 //   document.getElementById("popdisplay").innerHTML = this.value;
 // };
 
-var query = "https://api.spotify.com/v1/recommendations/?limit=2&market=ES";
+var query = "https://api.spotify.com/v1/recommendations/?limit=3&market=ES";
 
 //called upon submit, will gather all sliders that have been moved and the seeds and create a query to POST
 function getResults() {
@@ -59,12 +59,20 @@ function getResults() {
 }
 //displaying results 
 function displayResults(payload) {
-  console.log(payload)
   let songArray = Object.entries(payload);
+  console.log(songArray)
   for (let i=0; i<songArray.length; i++){
     let thisCard = 'card' + i;
     let card = document.getElementById(thisCard);
-    // console.log(songArray[i])
+    let artist = songArray[i][1][2][0].name
+    console.log(artist)
+    card.firstChild.src=songArray[i][1][1][1].url;
+   card.getElementsByClassName("card-title")[0].innerHTML = songArray[i][0]
+    card.getElementsByClassName('card-text')[0].innerHTML += artist
+    card.getElementsByClassName('card-text')[1].innerHTML += songArray[i][1][3]
+    card.getElementsByClassName('card-text')[2].innerHTML += songArray[i][1][4]
+    card.getElementsByClassName('btn-success')[0].setAttribute("href",songArray[i][1][5] );
+    card.getElementsByClassName('btn-warning')[0].setAttribute("href", songArray[i][1][6]);
   }
 
 }
