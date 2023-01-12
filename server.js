@@ -48,19 +48,23 @@ app.post('/recommend', (req, res) => {
     },
     json: true
   }
-  let payload = ''
+  let payload = {};
   request.get(recommend, function(error, response, body) {
-    console.log(body)
-    if (error) console.log('error retrieving info from spotify')
-    for (let tracks in body.tracks){
-      payload+=tracks.name;
+    if (error) console.log('error retrieving info from spotify');
+    for (let i=0; i<body.tracks.length; i++){
+      let thisSong = [];
+      thisSong.push(body.tracks[i].name);
+      thisSong.push(body.tracks[i].album.images);
+      thisSong.push(body.tracks[i].album.releaseDate, body.tracks[i].album.name)
+      thisSong.push(body.tracks[i].artists);
+      thisSong.push(body.tracks[i].external_urls.spotify)
+      thisSong.push(body.tracks[i].preview_url)
+      payload[body.tracks[i].name] = thisSong;
     }
-    console.log(payload)
-        });
-  res.send(payload)
+    res.send({'payload': payload })
+        })
+  
 });
-https://api.spotify.com/v1/recommendations?limit=10&market=ES&seed_artists=4NHQUGzhtTLFvgF5SZesLK&seed_genres=classical%2Ccountry&seed_tracks=0c6xIDDpzE81m2q797ordA" -H "Accept: application/json" -H "Content-Type: application/json" -H "Authorization: Bearer BQDxnZWxR0hIvWLafT4REzWXBTi4Ciy9l7fvmr62jENG3K24Nl7FlKF3Nz5ubBKJQreF0sJ-5naaRUyXbU33b6EvhjjTbYoDE_ehjdVKNOfkIO_f8O1mBH2U0zw6tG45H1BNsaNWqLj19MIf7e1gYq3FkcuT1LKzDAZN0Zd2EOktxBU9
-
 // request.post(authOptions, function(error, response, body) {
 //   if (!error && response.statusCode === 200) {
 
@@ -87,3 +91,37 @@ app.listen(process.env.PORT, () => {
   console.log(`Server is running on port ${process.env.PORT}, you better go catch it!`);
 });
 
+// {
+//   album: {
+//     album_type: 'COMPILATION',
+//     artists: [Array],
+//     external_urls: [Object],
+//     href: 'https://api.spotify.com/v1/albums/77TvtJAiUlwM8q4r7VneKL',
+//     id: '77TvtJAiUlwM8q4r7VneKL',
+//     images: [Array],
+//     name: 'Pure... Chillout',
+//     release_date: '2011-06-03',
+//     release_date_precision: 'day',
+//     total_tracks: 68,
+//     type: 'album',
+//     uri: 'spotify:album:77TvtJAiUlwM8q4r7VneKL'
+//   },
+//   artists: [ [Object] ],
+//   disc_number: 1,
+//   duration_ms: 274346,
+//   explicit: false,
+//   external_ids: { isrc: 'GBBBM9002093' },
+//   external_urls: {
+//     spotify: 'https://open.spotify.com/track/6vFUFJzXkbbW2YHWt3tIom'
+//   },
+//   href: 'https://api.spotify.com/v1/tracks/6vFUFJzXkbbW2YHWt3tIom',
+//   id: '6vFUFJzXkbbW2YHWt3tIom',
+//   is_local: false,
+//   is_playable: true,
+//   name: 'Cowboys and Angels - Edit',
+//   popularity: 16,
+//   preview_url: 'https://p.scdn.co/mp3-preview/49067fe12b54a49dbe0e1d5577c46a6cd19afcd7?cid=80af750695d24965b96b84c1b2b0665b',
+//   track_number: 15,
+//   type: 'track',
+//   uri: 'spotify:track:6vFUFJzXkbbW2YHWt3tIom'
+// },

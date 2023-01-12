@@ -7,14 +7,14 @@ const results = document.querySelector('#results');
 const seeds = document.querySelector('.seeds');
 const sliders = document.querySelectorAll('input[type=range]');
 console.log(inputs)
-//When form has been submitted, gather all final slider paramaters that have been touched, the seeds, send POST request
+//When form has been submitted, gather all final slider parameters that have been touched, the seeds, send POST request
 function formSubmitted(event) {
   event.preventDefault();
   let params = [];
   for (var i = 0; i < inputs.length; i++) {
     params.push(inputs[i].name + '=' + inputs[i].value);
   }
-  console.log(params)
+  // console.log(params)
   getResults();
 }
 
@@ -54,9 +54,20 @@ function getResults() {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({query})
-  }).then(response => console.log('got this far'));
+  }).then(resp => resp.json())
+  .then(data => {displayResults(data.payload)}).catch(err => { console.log(err) });;
 }
+//displaying results 
+function displayResults(payload) {
+  console.log(payload)
+  let songArray = Object.entries(payload);
+  for (let i=0; i<songArray.length; i++){
+    let thisCard = 'card' + i;
+    let card = document.getElementById(thisCard);
+    // console.log(songArray[i])
+  }
 
+}
 
 // Later will use autocomplete functions to show available artists and tracks
 // autocomplete({
