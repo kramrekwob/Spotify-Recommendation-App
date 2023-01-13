@@ -11,7 +11,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 var client_id = '80af750695d24965b96b84c1b2b0665b'; // Your client id
 var client_secret = '6415a1e2f2c946fb85cd6d236d83d059'; // Your secret
 
-//let it use the public folder for scripts
+//let it use the public folder
 app.use(express.static("public"));
 
 // application requests authorization
@@ -27,18 +27,23 @@ var authOptions = {
 };
 //receive access token as body.access_token
 var tempToken;
-
-request.post(authOptions, function (error, response, body) {
+let expiration
+function getAuthToken() {request.post(authOptions, function (error, response, body) {
   if (error) console.log('initial authentication error')
   if (!error && response.statusCode === 200) {
-    var token = body.access_token;
+    expiration = new Date().getSeconds+ 3600
     tempToken = body.access_token;
     console.log(tempToken)
     i = tempToken;
   }
 });
+}
+getAuthToken();
 
 app.post('/recommend', (req, res) => {
+  if (newDate()>expiration){
+    getAuthToken();
+  }
   console.log(tempToken)
   console.log(req.body)
   let recommend = {
@@ -58,7 +63,7 @@ app.post('/recommend', (req, res) => {
       thisSong.push(body.tracks[i].artists);
       thisSong.push(body.tracks[i].album.name);
       thisSong.push(body.tracks[i].album.release_date);
-      thisSong.push(body.tracks[i].external_urls.spotify);
+      thisSong.push(body.tracks[i].external_urls.spotify)
       thisSong.push(body.tracks[i].preview_url)
       payload[body.tracks[i].name] = thisSong;
     }
