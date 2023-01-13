@@ -8,9 +8,6 @@ const app = express();
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
-var client_id = '80af750695d24965b96b84c1b2b0665b'; // Your client id
-var client_secret = '6415a1e2f2c946fb85cd6d236d83d059'; // Your secret
-
 //let it use the public folder
 app.use(express.static("public"));
 
@@ -18,7 +15,7 @@ app.use(express.static("public"));
 var authOptions = {
   url: 'https://accounts.spotify.com/api/token',
   headers: {
-    'Authorization': 'Basic ' + (new Buffer.from(client_id + ':' + client_secret).toString('base64'))
+    'Authorization': 'Basic ' + (new Buffer.from(process.env.CLIENT_ID + ':' + process.env.CLIENT_SECRET).toString('base64'))
   },
   form: {
     grant_type: 'client_credentials'
