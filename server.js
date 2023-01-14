@@ -6,6 +6,8 @@ const bodyParser = require("body-parser");
 const app = express();
 
 app.use(bodyParser.json())
+
+
 app.use(bodyParser.urlencoded({ extended: false }))
 
 //let it use the public folder
@@ -22,9 +24,9 @@ var authOptions = {
   },
   json: true
 };
-//receive access token as body.access_token
+//receive access token as body.access_token 
 var tempToken;
-let expiration
+let expiration;
 function getAuthToken() {request.post(authOptions, function (error, response, body) {
   if (error) console.log('initial authentication error')
   if (!error && response.statusCode === 200) {
@@ -38,7 +40,7 @@ function getAuthToken() {request.post(authOptions, function (error, response, bo
 getAuthToken();
 
 app.post('/recommend', (req, res) => {
-  if (newDate()>expiration){
+  if (new Date() > expiration){
     getAuthToken();
   }
   console.log(tempToken)
@@ -68,6 +70,43 @@ app.post('/recommend', (req, res) => {
         })
   
 });
+app.post('/search', async (req, res) => {
+  if (new Date()>expiration){
+    getAuthToken();
+  }
+  console.log(req.body)
+  const {searchTerm, searchType} = req.body;
+  let endpoint = '';
+  let searchQuery = '';
+  if (searchType === 'artist') {
+    endpoint = 'https://api.spotify.com/v1/search?q=' + searchTerm + '&type=artist&limit=5';
+  } else if (searchType === 'track') {
+    endpoint = 'https://api.spotify.com/v1/search?q=' + searchTerm + '&type=track&limit=5';
+  }
+  let search = {
+    url: endpoint,
+    headers: {'Authorization': 'Bearer ' + tempToken}, 
+    json: true}
+  try {
+      // use your access_token and send it with the request
+      const response = request.get(search, function(error, response, body){
+        if (error) console.log('error retrieving search info from spotify');
+        console.log(body)
+        res.json(body.artists.items)
+      });
+      // const data = response.data.artists || response.data.tracks;
+      // const results = data.items.map((item) => {
+      //   return {
+      //     name: item.name,
+      //     images: item.images
+      //   }
+      // });
+  } catch (error) {
+      console.log(error);
+      res.status(500).json({ message: "Error getting data from Spotify API"});
+  }
+});
+
 // request.post(authOptions, function(error, response, body) {
 //   if (!error && response.statusCode === 200) {
 
@@ -86,9 +125,9 @@ app.post('/recommend', (req, res) => {
 //   }
 // });
 
-app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/index.html')
-});
+// app.get('/', (req, res) => {
+//   res.sendFile(__dirname + '/index.html')
+// });
 
 app.listen(process.env.PORT, () => {
   console.log(`Server is running on port ${process.env.PORT}, you better go catch it!`);

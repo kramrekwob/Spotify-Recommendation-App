@@ -1,4 +1,0 @@
-export default function Seed() {
-    return (<div> First Component </div>
-    )
-}
