@@ -74,10 +74,11 @@ app.post('/search', async (req, res) => {
   if (new Date()>expiration){
     getAuthToken();
   }
+  
   console.log(req.body)
   const {searchTerm, searchType} = req.body;
+  if (searchTerm == '') {console.log('empty query')}
   let endpoint = '';
-  let searchQuery = '';
   if (searchType === 'artist') {
     endpoint = 'https://api.spotify.com/v1/search?q=' + searchTerm + '&type=artist&limit=5';
   } else if (searchType === 'track') {
@@ -89,11 +90,30 @@ app.post('/search', async (req, res) => {
     json: true}
   try {
       // use your access_token and send it with the request
-      const response = request.get(search, function(error, response, body){
-        if (error) console.log('error retrieving search info from spotify');
-        console.log(body)
-        res.json(body.artists.items)
-      });
+      const response = request.get(search, function(error, response, body) {
+        if (error) {
+            console.log('error retrieving search info from spotify');
+        } else {
+            let searchItems;
+            if (searchType === 'artist') {
+                searchItems = body.artists.items;
+                console.log(searchItems)
+            } else if (searchType === 'track') {
+              searchItems = body.tracks.items.map(item => {
+                return {
+                    id: item.id,
+                    type: 'track',
+                    name: item.name,
+                    images: item.album.images,
+                    artist: item.artists
+                }
+            });
+                console.log(searchItems)
+            }
+            res.json(searchItems);
+        }
+    });
+    
       // const data = response.data.artists || response.data.tracks;
       // const results = data.items.map((item) => {
       //   return {

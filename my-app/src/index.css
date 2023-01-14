@@ -11,3 +11,8 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.highlighted-card {
+  transform: scale(1.1);
+  color: blue;
+  transition: transform 0.2s ease-in-out;
+}
