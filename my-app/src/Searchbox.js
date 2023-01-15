@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import {Button, Form, InputGroup, Row, Col, Dropdown, DropdownItem, FloatingLabel, DropdownButton, Container} from 'react-bootstrap';
+import {Button, Form, InputGroup, Row, Col, Dropdown, FloatingLabel, DropdownButton, Container} from 'react-bootstrap';
 import InputGroupGenres from './InputGroupGenres'
 import SearchResults from './SearchResults';
 
@@ -10,6 +10,7 @@ const SearchBox = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [searchType, setSearchType] = useState('artist'); // Default search type is artist
   const [selectedResults, setSelectedResults] = useState([]);
+  
 
   // Handle search input changes
   const handleSearchInput = (e) => {
@@ -38,6 +39,7 @@ const SearchBox = () => {
   }
   const handleResultClick = (result) => {
     console.log(result)
+    if (result.name == '') return;
     if (selectedResults.length === 5) {
       return;
     }
@@ -51,19 +53,20 @@ const SearchBox = () => {
       setSelectedResults([...selectedResults, result]);
     }
   }
+
   return (
-    <div className=''>
-      <Form onSubmit={handleSubmit} className='col-12'>
+    <div>
+      <Form onSubmit={handleSubmit} className='container mx-auto'>
         <Row className="align-items-center">
           <Col xs="6">
             <Row>
-              <InputGroup className="">
+              <InputGroup>
                 <DropdownButton title="Artist or Track" value={searchType} onChange={handleSearchType}>
-                  <DropdownItem value="artist">Artist</DropdownItem>
-                  <DropdownItem value="track">Track</DropdownItem>
+                  <Dropdown.Item value="artist">Artist</Dropdown.Item>
+                  <Dropdown.Item value="track">Track</Dropdown.Item>
                 </DropdownButton>
                 <FloatingLabel label="Artist or Track">
-                  <Form.Control column sm={4} type="search" aria-describedby="artistText" placeholder="Enter an artist or track" value={searchTerm} className="" onChange={handleSearchInput} />
+                  <Form.Control type="search" aria-describedby="artistText" placeholder="Enter an artist or track" value={searchTerm} onChange={handleSearchInput} />
                 </FloatingLabel>
                 <Button type="submit">Search</Button>
               </InputGroup>
@@ -77,13 +80,12 @@ const SearchBox = () => {
         </Row>
       </Form>
       <SearchResults results={searchResults} handleResultClick={handleResultClick}></SearchResults>
-      <div>
+      <div className="mt-5">
         <span>Up to 5 Seeds Can Be Selected:</span><Row>
           {selectedResults.slice(0, 5).map((result, index) => (
             <Col><span key={index}> {result.name}</span></Col>
           ))}
         </Row>
-        <Button>Get Recommendations</Button>
       </div>
     </div>
   );

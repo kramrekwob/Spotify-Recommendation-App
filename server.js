@@ -40,6 +40,45 @@ function getAuthToken() {
 }
 getAuthToken();
 
+// app.post('/recommendations', (req, res) => {
+//   const {sliders, seeds} = req.body;
+//   let query = "https://api.spotify.com/v1/recommendations/?market=ES";
+//   let seedChoices = {};
+//   let levels = [];
+
+//   for (let i = 0; i < sliders.length; i++) {
+// //     if (sliders[i].name === "danceability") {
+// //         query += `&${sliders[i].name}=${sliders[i].value}`;
+//     }
+//     if (sliders[i].name === "energy") {
+//         query += `&${sliders[i].name}=${sliders[i].value}`;
+//     }
+//     // add other sliders here
+//   }
+//   for (let i = 0; i < seeds.length; i++) {
+//     if (seeds[i].type === "artist") {
+//         seedChoices.artist = seeds[i].id;
+//     }
+//     if (seeds[i].type === "track") {
+//         seedChoices.track = seeds[i].id;
+//     }
+//     if (seeds[i].type === "genre") {
+//         seedChoices.genre = seeds[i].name;
+//     }
+//   }
+//   query += `&seed_artists=${seedChoices.artist}&seed_tracks=${seedChoices.track}&seed_genres=${seedChoices.genre}`;
+//   fetch(query)
+//     .then(response => response.json())
+//     .then(data => {
+//       res.send(data);
+//     })
+//     .catch(err => {
+//       console.log(err);
+//       res.send(err);
+//     });
+// });
+
+
 app.post('/recommend', (req, res) => {
   if (new Date() > expiration) {
     getAuthToken();
@@ -54,6 +93,7 @@ app.post('/recommend', (req, res) => {
     json: true
   }
   let payload = {};
+  console.log(req.body)
   request.get(recommend, function (error, response, body) {
     if (error) console.log('error retrieving info from spotify');
     for (let i = 0; i < body.tracks.length; i++) {
@@ -115,46 +155,20 @@ app.post('/search', async (req, res) => {
         res.json(searchItems);
       }
     });
-
-    // const data = response.data.artists || response.data.tracks;
-    // const results = data.items.map((item) => {
-    //   return {
-    //     name: item.name,
-    //     images: item.images
-    //   }
-    // });
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Error getting data from Spotify API" });
   }
 });
 
-// request.post(authOptions, function(error, response, body) {
-//   if (!error && response.statusCode === 200) {
-
-//     // use the access token to access the Spotify Web API
-//     var token = body.access_token;
-//     var options = {
-//       url: "https://api.spotify.com/v1/recommendations/available-genre-seeds",
-//       headers: {
-//         'Authorization': 'Bearer ' + token
-//       },
-//       json: true
-//     };
-//     request.get(options, function(error, response, body) {
-//         console.log(body)
-//     });
-//   }
-// });
-
-// app.get('/', (req, res) => {
-//   res.sendFile(__dirname + '/index.html')
-// });
 
 app.listen(process.env.PORT, () => {
   console.log(`Server is running on port ${process.env.PORT}, you better go catch it!`);
 });
 
+
+
+// 
 // {
 //   album: {
 //     album_type: 'COMPILATION',

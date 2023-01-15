@@ -1,13 +1,21 @@
 import './App.css';
+import React, { useState } from 'react';
 import SearchBox from './Searchbox'
 import Slider from './Slider';
+import GetRecommendations from './GetRecommendations';
+
 function App() {
+
+const [recommendations, setRecommendations] = useState([]);
+const handleRecommendations = (data) => {
+  setRecommendations(data);
+}
   return (
-    <body>
+    <main>
       <h1 className="text-center my-5">Spotify Recommendation App</h1>
       <div className="App">
         <SearchBox className="container flex" />
-      <form class="container" action="" method="" id="mainform">
+      <form className="container" action="" method="" id="mainform">
         <Slider
           name="liveness"
           label="Liveness"
@@ -29,8 +37,9 @@ function App() {
           label="Tempo"
         />
       </form>
+      <GetRecommendations handleRecommendations={handleRecommendations}/>
       </div>
-    </body>
+    </main>
   );
 }
 

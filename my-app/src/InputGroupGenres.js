@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
-import { Form, InputGroup, Button, FormControl } from 'react-bootstrap';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Container from 'react-bootstrap/Container';
+import { Form, InputGroup, Button, FormControl, FloatingLabel, Row, Col, Container} from 'react-bootstrap';
+
 
 
 const genres = ['acoustic', 'afrobeat', 'alt-rock',
@@ -82,35 +80,17 @@ function InputGroupGenres({ handleResultClick }) {
     }
 
     return (
-        <Form class="container">
-            <Row>
-                <InputGroup>
+                <InputGroup className="pb-3">
                     <InputGroup.Text> OR:</InputGroup.Text>
-                    <Form.Select aria-label="Default select example" value={selectedGenre} onChange={handleGenreChange}>
-                        <option value="">Select a genre</option>
+                    <Form.Select size="lg" aria-label="Default select example" value={selectedGenre} onChange={handleGenreChange}>
+                        <option value="">Select a Genre</option>
                         {genres.map(genre => (
                             <option key={genre} value={genre}>
                                 {genre}
                             </option>
                         ))} </Form.Select>
-
                     <Button onClick={handleSubmit}>Add Seed</Button>
                 </InputGroup>
-            </Row>
-        </Form>
-
-        //     <Form >
-        //     <InputGroup>
-        //     <Form.Select as="select" value={selectedGenre} onChange={handleGenreChange}>
-        //                 
-
-        //             </Form.Select>
-        //             <InputGroup.Append>
-        //                 <Button variant="outline-secondary" onClick={handleSubmit}>Submit</Button>
-        //             </InputGroup.Append>
-        //         </InputGroup>
-        //     </ Form>
-        // );
     )
 };
 
