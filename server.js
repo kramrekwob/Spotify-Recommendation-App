@@ -27,20 +27,21 @@ var authOptions = {
 //receive access token as body.access_token 
 var tempToken;
 let expiration;
-function getAuthToken() {request.post(authOptions, function (error, response, body) {
-  if (error) console.log('initial authentication error')
-  if (!error && response.statusCode === 200) {
-    expiration = new Date().getSeconds+ 3600
-    tempToken = body.access_token;
-    console.log(tempToken)
-    i = tempToken;
-  }
-});
+function getAuthToken() {
+  request.post(authOptions, function (error, response, body) {
+    if (error) console.log('initial authentication error')
+    if (!error && response.statusCode === 200) {
+      expiration = new Date().getSeconds + 3600
+      tempToken = body.access_token;
+      console.log(tempToken)
+      i = tempToken;
+    }
+  });
 }
 getAuthToken();
 
 app.post('/recommend', (req, res) => {
-  if (new Date() > expiration){
+  if (new Date() > expiration) {
     getAuthToken();
   }
   console.log(tempToken)
@@ -53,9 +54,9 @@ app.post('/recommend', (req, res) => {
     json: true
   }
   let payload = {};
-  request.get(recommend, function(error, response, body) {
+  request.get(recommend, function (error, response, body) {
     if (error) console.log('error retrieving info from spotify');
-    for (let i=0; i<body.tracks.length; i++){
+    for (let i = 0; i < body.tracks.length; i++) {
       let thisSong = [];
       thisSong.push(body.tracks[i].name);
       thisSong.push(body.tracks[i].album.images);
@@ -66,18 +67,18 @@ app.post('/recommend', (req, res) => {
       thisSong.push(body.tracks[i].preview_url)
       payload[body.tracks[i].name] = thisSong;
     }
-    res.send({'payload': payload })
-        })
-  
+    res.send({ 'payload': payload })
+  })
+
 });
 app.post('/search', async (req, res) => {
-  if (new Date()>expiration){
+  if (new Date() > expiration) {
     getAuthToken();
   }
-  
+
   console.log(req.body)
-  const {searchTerm, searchType} = req.body;
-  if (searchTerm == '') {console.log('empty query')}
+  const { searchTerm, searchType } = req.body;
+  if (searchTerm == '') { console.log('empty query') }
   let endpoint = '';
   if (searchType === 'artist') {
     endpoint = 'https://api.spotify.com/v1/search?q=' + searchTerm + '&type=artist&limit=5';
@@ -86,44 +87,45 @@ app.post('/search', async (req, res) => {
   }
   let search = {
     url: endpoint,
-    headers: {'Authorization': 'Bearer ' + tempToken}, 
-    json: true}
+    headers: { 'Authorization': 'Bearer ' + tempToken },
+    json: true
+  }
   try {
-      // use your access_token and send it with the request
-      const response = request.get(search, function(error, response, body) {
-        if (error) {
-            console.log('error retrieving search info from spotify');
-        } else {
-            let searchItems;
-            if (searchType === 'artist') {
-                searchItems = body.artists.items;
-                console.log(searchItems)
-            } else if (searchType === 'track') {
-              searchItems = body.tracks.items.map(item => {
-                return {
-                    id: item.id,
-                    type: 'track',
-                    name: item.name,
-                    images: item.album.images,
-                    artist: item.artists
-                }
-            });
-                console.log(searchItems)
+    // use your access_token and send it with the request
+    const response = request.get(search, function (error, response, body) {
+      if (error) {
+        console.log('error retrieving search info from spotify');
+      } else {
+        let searchItems;
+        if (searchType === 'artist') {
+          searchItems = body.artists.items;
+          console.log(searchItems)
+        } else if (searchType === 'track') {
+          searchItems = body.tracks.items.map(item => {
+            return {
+              id: item.id,
+              type: 'track',
+              name: item.name,
+              images: item.album.images,
+              artist: item.artists
             }
-            res.json(searchItems);
+          });
+          console.log(searchItems)
         }
+        res.json(searchItems);
+      }
     });
-    
-      // const data = response.data.artists || response.data.tracks;
-      // const results = data.items.map((item) => {
-      //   return {
-      //     name: item.name,
-      //     images: item.images
-      //   }
-      // });
+
+    // const data = response.data.artists || response.data.tracks;
+    // const results = data.items.map((item) => {
+    //   return {
+    //     name: item.name,
+    //     images: item.images
+    //   }
+    // });
   } catch (error) {
-      console.log(error);
-      res.status(500).json({ message: "Error getting data from Spotify API"});
+    console.log(error);
+    res.status(500).json({ message: "Error getting data from Spotify API" });
   }
 });
 

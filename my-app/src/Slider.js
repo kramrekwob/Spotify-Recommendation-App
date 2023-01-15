@@ -8,7 +8,7 @@ const Slider = (props) => {
   }
   return (
     <div className="row">
-      <label htmlFor={props.name} className="form-label col-3 border text-center mt-2">{props.label}</label>
+      <label htmlFor={props.name} className="form-label border text-center mt-2">{props.label}</label>
       <input
         name={props.name}
         id={props.name}
