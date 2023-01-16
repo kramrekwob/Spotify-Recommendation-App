@@ -19,7 +19,7 @@ function ResultsCards({ handleShowInitialScreen, recommendations }) {
                             <Card.Title>{song[0]}</Card.Title>
                             <div>
                                 {
-                                    song[2].length > 1
+                                    song[2].length >= 1
                                         ? "Artists: " + song[2].map((artist, index) => artist.name).join(", ")
                                         : "Artist: " + song[2][0].name
                                 }

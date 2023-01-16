@@ -84,7 +84,7 @@ function clearStates() {
   <GetRecommendations clearStates={clearStates} handleRecommendations={handleRecommendations} selectedResults={selectedResults} sliders={sliders} handleShowResults={handleShowResults}/>
     <Button variant="warning" onClick={() => clearStates()}>Clear</Button>
   </div>
-  <div>Add Parameters:</div>
+  <div>A</div>
   </Row>
       <Container className="container" >
         <Row>

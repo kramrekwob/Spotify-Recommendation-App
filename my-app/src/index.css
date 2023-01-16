@@ -50,22 +50,3 @@ code {
   color: blue;
   transition: transform 0.5s ease-in-out;
 }
-/* .highlighted-card-enter {
-  color: blue;
-} */
-/* .highlighted-card-enter-active {
-  transform: scale(1.05);
-  color: blue;
-  transition: transform 0.2s ease-in;
-}
-.highlighted-card-exit {
-  opacity: 1;
-}
-.highlighted-card-exit-active {
-  transform:scale(1.00);
-  transition: opacity 300ms ease-out;
-} */
-/* .fade-in {
-  opacity: 1;
-  transition: opacity 1s;
-} */
