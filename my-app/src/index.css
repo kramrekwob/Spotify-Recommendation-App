@@ -11,11 +11,7 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-.highlighted-card {
-  transform: scale(1.05);
-  color: blue;
-  transition: transform 0.2s ease-in-out;
-}
+
 .card-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -48,3 +44,22 @@ code {
   background-color: #ccc;
   border-radius:10px;
 }
+/* .highlighted-card-enter {
+  color: blue;
+} */
+/* .highlighted-card-enter-active {
+  transform: scale(1.05);
+  color: blue;
+  transition: transform 0.2s ease-in;
+}
+.highlighted-card-exit {
+  opacity: 1;
+}
+.highlighted-card-exit-active {
+  transform:scale(1.00);
+  transition: opacity 300ms ease-out;
+} */
+/* .fade-in {
+  opacity: 1;
+  transition: opacity 1s;
+} */

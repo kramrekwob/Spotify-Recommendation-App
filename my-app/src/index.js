@@ -4,11 +4,22 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './luxbootstrap.min.css';
+import { BrowserRouter, Route, Routes} from 'react-router-dom';
+import HowPage from './HowPage';
+import WhyPage from './WhyPage';
+import MyNavbar from './MyNavbar';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+  <BrowserRouter>
+  <MyNavbar></MyNavbar>
+  <Routes>
+      <Route exact path="/" element={<App />} />
+      <Route path="/how" element={<HowPage />} />
+      <Route path="/why" element={<WhyPage />} />
+      </Routes>
+  </BrowserRouter>
   </React.StrictMode>
 );
 

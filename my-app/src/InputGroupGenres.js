@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Form, InputGroup, Button, FormControl, FloatingLabel, Row, Col, Container} from 'react-bootstrap';
+import { Form, InputGroup, Button} from 'react-bootstrap';
 
 
 
@@ -80,8 +80,8 @@ function InputGroupGenres({ handleResultClick }) {
     }
 
     return (
-                <InputGroup className="pb-3">
-                    <InputGroup.Text> OR:</InputGroup.Text>
+                <InputGroup>
+                    <InputGroup.Text style={{height:'56px'}}> OR:</InputGroup.Text>
                     <Form.Select aria-label="Default select example" value={selectedGenre} onChange={handleGenreChange}>
                         <option value="">Select a Genre</option>
                         {genres.map(genre => (

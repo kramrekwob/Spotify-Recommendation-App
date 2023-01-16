@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-import { Card, Button, Image, CardText, CardGroup } from 'react-bootstrap';
+import { Card, Button, Image} from 'react-bootstrap';
 
 
 function ResultsCards({ handleShowInitialScreen, recommendations }) {
@@ -17,7 +17,7 @@ function ResultsCards({ handleShowInitialScreen, recommendations }) {
                         <Image topwidth="100%" src={song[1][0] ? song[1][0].url : '/defaultImage.jpg'} alt="Card image cap" />
                         <Card.Body>
                             <Card.Title>{song[0]}</Card.Title>
-                            <Card.Text>
+                            <div>
                                 {
                                     song[2].length > 1
                                         ? "Artists: " + song[2].map((artist, index) => artist.name).join(", ")
@@ -25,7 +25,7 @@ function ResultsCards({ handleShowInitialScreen, recommendations }) {
                                 }
                                  <div>Album: {song[3]}</div>
                                 <div>Release: {song[4]}</div>
-                            </Card.Text>
+                            </div>
                             <Button variant="success" target="_blank" href={song[5]} rel="noopener noreferrer">Spotify Link</Button>
                             <Button variant="warning" target="_blank" href={song[6]} rel="noopener noreferrer">Preview</Button>
                         </Card.Body>

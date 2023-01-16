@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Card, CardGroup, Image, OverlayTrigger, Tooltip } from 'react-bootstrap';
+import { CSSTransition } from 'react-transition-group';
+
 
 function SearchResults(props) {
   const { results, handleResultClick } = props;
@@ -8,11 +10,15 @@ function SearchResults(props) {
   const handleHover = (result) => {
     setHoveredResult(result);
   }
+  const handleMouseLeave = () => {
+    setHoveredResult(null);
+    };
   return (
     <CardGroup className="my-3">
 
       {results.map((result, index) => {
         return (
+          <CSSTransition in={hoveredResult === result} classNames="highlighted-card" >
           <OverlayTrigger key={result.id}
             placement="top"
             overlay={
@@ -21,14 +27,16 @@ function SearchResults(props) {
               </Tooltip>
             }>
             <Card key={index}
-              onMouseEnter={() => handleHover(result)} onClick={() => handleResultClick(result)} className={hoveredResult === result ? 'highlighted-card' : ''}>
-              <div class="imageContainer">
+              onMouseEnter={() => handleHover(result)} 
+              onMouseLeave={handleMouseLeave} onClick={() => handleResultClick(result)} className="fade-in">
+              <div className="imageContainer">
               <Image src={result.images[2]? result.images[1].url : '/defaultImage.jpg'} alt={result.name} fluid className="searchImages"/> </div>
               <Card.Body>
                 <Card.Title>{result.name}</Card.Title>
               </Card.Body>
             </Card>
           </OverlayTrigger>
+          </CSSTransition>
         )
       })}
     </CardGroup>

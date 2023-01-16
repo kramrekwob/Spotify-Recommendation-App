@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Form, Row, Col } from 'react-bootstrap';
 
 const Slider = (props) => {

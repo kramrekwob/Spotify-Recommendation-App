@@ -1,21 +1,21 @@
 
-import React, { useState } from 'react';
+import React from 'react';
 import axios from 'axios';
 import {Button} from 'react-bootstrap'
 
 function GetRecommendations(props) {
     const handleClick = async () => {
-        if (!props.selectedResults) {
+        console.log(props.selectedResults)
+        if (!props.selectedResults.length) {
             alert("Please select at least one seed before sending a request");
             return;
-        }
+        } else
         try {
             //This removes all the sliders that weren't touched.
-            const filteredParams = Object.entries(props.sliders).map(([name, {value, hasBeenMoved}]) => {
-                if (hasBeenMoved) {
-                    return { name, value };
-                }
-            }).filter(Boolean);
+            const filteredParams = Object.entries(props.sliders)
+            .filter(([, {hasBeenMoved}]) => hasBeenMoved)
+            .map(([name, {value}]) => ({name, value}));
+            console.log(filteredParams)
             const data = {sliders: filteredParams, seed: props.selectedResults};
             const res = await axios.post('/recommend', data);
             props.handleRecommendations(res.data.payload);

@@ -5,7 +5,7 @@ import Slider from './Slider';
 import GetRecommendations from './GetRecommendations';
 import {Row, Col, Container, Button} from 'react-bootstrap'
 import ResultsCards from './ResultsCards'
-import MyNavbar from './MyNavbar'
+
 
 function App() {
 const [recommendations, setRecommendations] = useState([]);
@@ -64,7 +64,6 @@ function clearStates() {
 
   return (
     <main>
-      <MyNavbar></MyNavbar>
       <div className="App" style={{transition: 'all 0.5s ease-in-out'}}>
       {showResults ?  <ResultsCards recommendations={recommendations} handleShowInitialScreen={handleShowInitialScreen}></ResultsCards> : 
       <div>
@@ -73,17 +72,19 @@ function clearStates() {
   <div className="seed-header">Up to 5 Seeds Can Be Selected:</div>
   <div className="d-flex flex-row align-items-center justify-content-start">
     {selectedResults.slice(0, 5).map((result, index) => (
-      <div className="seed-container d-flex align-items-center mr-3">
-        {result.images ? <img src={result.images[2].url} alt={result.name} className="seed-image mr-3" /> : <div className="seed-image mr-3"></div>}
+      <div className="seed-container d-flex align-items-center mr-3" key={index}>
+        {result.images[2] ? <img src={result.images[2].url} alt={result.name} className="seed-image mr-3" /> : <div className="seed-image mr-3"></div>}
         <span>{result.name}</span>
       </div>
     ))}
   </div>
-  <div className="d-flex align-items-end mt-3">
+</div>
+<Row>
+<div className="d-flex justify-content-center mt-3">
   <GetRecommendations clearStates={clearStates} handleRecommendations={handleRecommendations} selectedResults={selectedResults} sliders={sliders} handleShowResults={handleShowResults}/>
     <Button variant="warning" onClick={() => clearStates()}>Clear</Button>
   </div>
-</div>
+  </Row>
 
       <Container className="container" >
         <Row>
