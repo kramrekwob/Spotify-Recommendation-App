@@ -82,7 +82,7 @@ function InputGroupGenres({ handleResultClick }) {
     return (
                 <InputGroup className="pb-3">
                     <InputGroup.Text> OR:</InputGroup.Text>
-                    <Form.Select size="lg" aria-label="Default select example" value={selectedGenre} onChange={handleGenreChange}>
+                    <Form.Select aria-label="Default select example" value={selectedGenre} onChange={handleGenreChange}>
                         <option value="">Select a Genre</option>
                         {genres.map(genre => (
                             <option key={genre} value={genre}>

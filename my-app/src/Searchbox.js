@@ -45,10 +45,10 @@ const SearchBox = (props) => {
           <Col xs="6">
             <Row>
               <InputGroup>
-                <DropdownButton title="Artist or Track" value={searchType} onChange={handleSearchType}>
-                  <Dropdown.Item value="artist">Artist</Dropdown.Item>
-                  <Dropdown.Item value="track">Track</Dropdown.Item>
-                </DropdownButton>
+              <DropdownButton title={searchType} value={searchType} onSelect={(value) => setSearchType(value)}>
+  <Dropdown.Item eventKey="artist">Artist</Dropdown.Item>
+  <Dropdown.Item eventKey="track">Track</Dropdown.Item>
+</DropdownButton>
                 <FloatingLabel label="Artist or Track">
                   <Form.Control type="search" aria-describedby="artistText" placeholder="Enter an artist or track" value={searchTerm} onChange={handleSearchInput} />
                 </FloatingLabel>

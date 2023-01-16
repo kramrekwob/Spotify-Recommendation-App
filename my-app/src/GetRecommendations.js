@@ -26,7 +26,7 @@ function GetRecommendations(props) {
     }
 
     return (
-        <Button onClick={handleClick}>Get Recommendations</Button>
+        <Button onClick={() => {handleClick(); props.clearStates()}}>Get Recommendations</Button>
     );
 }
 export default GetRecommendations
