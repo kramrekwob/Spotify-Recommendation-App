@@ -105,7 +105,7 @@ app.post("/recommend", async (req, res) => {
         payload[body.tracks[i].name] = thisSong;
       }
       console.log(payload)
-      res.send({ payload });
+      res.send({payload});
       }
   });
 });

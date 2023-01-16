@@ -19,6 +19,7 @@ function GetRecommendations(props) {
             const data = {sliders: filteredParams, seed: props.selectedResults};
             const res = await axios.post('/recommend', data);
             props.handleRecommendations(res.data.payload);
+            props.handleShowResults();
         } catch (error) {
             console.log(error);
         }

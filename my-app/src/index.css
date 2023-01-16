@@ -16,3 +16,17 @@ code {
   color: blue;
   transition: transform 0.2s ease-in-out;
 }
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  margin: 2em;
+}
+.searchImages {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  overflow: hidden;
+}
+.imageContainer {
+  overflow: hidden;
+}

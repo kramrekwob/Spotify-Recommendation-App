@@ -9,7 +9,7 @@ function SearchResults(props) {
     setHoveredResult(result);
   }
   return (
-    <CardGroup className="mb-2">
+    <CardGroup className="my-3">
 
       {results.map((result, index) => {
         return (
@@ -22,7 +22,8 @@ function SearchResults(props) {
             }>
             <Card key={index}
               onMouseEnter={() => handleHover(result)} onClick={() => handleResultClick(result)} className={hoveredResult === result ? 'highlighted-card' : ''}>
-              <Image src={result.images[2].url} alt={result.name} fluid />
+              <div class="imageContainer">
+              <Image src={result.images[2]? result.images[1].url : '/defaultImage.jpg'} alt={result.name} fluid className="searchImages"/> </div>
               <Card.Body>
                 <Card.Title>{result.name}</Card.Title>
               </Card.Body>

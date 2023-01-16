@@ -4,11 +4,13 @@ import SearchBox from './Searchbox'
 import Slider from './Slider';
 import GetRecommendations from './GetRecommendations';
 import {Row, Col, Container} from 'react-bootstrap'
-import Display from './ResultsCards'
+import ResultsCards from './ResultsCards'
 
 function App() {
 const [recommendations, setRecommendations] = useState([]);
 const [selectedResults, setSelectedResults] = useState([]);
+const [showResults, setShowResults] = useState(false);
+
 const [sliders, setSliders] = useState({
   liveness: {value: .5, hasBeenMoved: false},
   loudness: {value: .5, hasBeenMoved: false},
@@ -41,12 +43,22 @@ const handleSliderChange = (sliderName, newValue) => {
       [sliderName]: { value: newValue, hasBeenMoved: true }
   });
 }
+const handleShowResults = () => {
+  setShowResults(true);
+}
+
+const handleShowInitialScreen = () => {
+  setShowResults(false);
+}
   return (
     <main>
       <h1 className="text-center my-5">Spotify Recommendation App</h1>
-      <div className="App">
+      <div className="App" style={{transition: 'all 0.5s ease-in-out'}}>
+      {showResults ?  <ResultsCards recommendations={recommendations} handleShowInitialScreen={handleShowInitialScreen}></ResultsCards> : 
+      <div>
         <SearchBox handleResultClick={handleResultClick} className="container flex" />
       <Container className="container" >
+        <Row>
         <Slider
           name="liveness"
           label="Liveness"
@@ -65,6 +77,8 @@ const handleSliderChange = (sliderName, newValue) => {
           value={sliders.danceability.value}
          handleSliderChange={handleSliderChange}
         />
+        </Row>
+        <Row>
         <Slider
           name="popularity"
           label="Popularity" value={sliders.popularity.value}
@@ -75,6 +89,7 @@ const handleSliderChange = (sliderName, newValue) => {
           label="Tempo" value={sliders.tempo.value}
           handleSliderChange={handleSliderChange}
         />
+        </Row>
       </Container>
           <div className="mt-5">
       <span>Up to 5 Seeds Can Be Selected:</span><Row>
@@ -83,9 +98,10 @@ const handleSliderChange = (sliderName, newValue) => {
           ))}
           </Row>
       </div>
-      <GetRecommendations handleRecommendations={handleRecommendations} selectedResults={selectedResults} sliders={sliders}/>
+      <GetRecommendations handleRecommendations={handleRecommendations} selectedResults={selectedResults} sliders={sliders} handleShowResults={handleShowResults}/>
+      </div> 
+      }
       </div>
-      <Display recommendations={recommendations}/>
     </main>
   );
 }
