@@ -40,77 +40,76 @@ function getAuthToken() {
 }
 getAuthToken();
 
-// app.post('/recommendations', (req, res) => {
-//   const {sliders, seeds} = req.body;
-//   let query = "https://api.spotify.com/v1/recommendations/?market=ES";
-//   let seedChoices = {};
-//   let levels = [];
 
-//   for (let i = 0; i < sliders.length; i++) {
-// //     if (sliders[i].name === "danceability") {
-// //         query += `&${sliders[i].name}=${sliders[i].value}`;
-//     }
-//     if (sliders[i].name === "energy") {
-//         query += `&${sliders[i].name}=${sliders[i].value}`;
-//     }
-//     // add other sliders here
-//   }
-//   for (let i = 0; i < seeds.length; i++) {
-//     if (seeds[i].type === "artist") {
-//         seedChoices.artist = seeds[i].id;
-//     }
-//     if (seeds[i].type === "track") {
-//         seedChoices.track = seeds[i].id;
-//     }
-//     if (seeds[i].type === "genre") {
-//         seedChoices.genre = seeds[i].name;
-//     }
-//   }
-//   query += `&seed_artists=${seedChoices.artist}&seed_tracks=${seedChoices.track}&seed_genres=${seedChoices.genre}`;
-//   fetch(query)
-//     .then(response => response.json())
-//     .then(data => {
-//       res.send(data);
-//     })
-//     .catch(err => {
-//       console.log(err);
-//       res.send(err);
-//     });
-// });
-
-
-app.post('/recommend', (req, res) => {
-  if (new Date() > expiration) {
-    getAuthToken();
-  }
-  console.log(tempToken)
-  console.log(req.body)
-  let recommend = {
-    url: req.body.query,
-    headers: {
-      'Authorization': 'Bearer ' + tempToken
-    },
-    json: true
-  }
-  let payload = {};
-  console.log(req.body)
-  request.get(recommend, function (error, response, body) {
-    if (error) console.log('error retrieving info from spotify');
-    for (let i = 0; i < body.tracks.length; i++) {
-      let thisSong = [];
-      thisSong.push(body.tracks[i].name);
-      thisSong.push(body.tracks[i].album.images);
-      thisSong.push(body.tracks[i].artists);
-      thisSong.push(body.tracks[i].album.name);
-      thisSong.push(body.tracks[i].album.release_date);
-      thisSong.push(body.tracks[i].external_urls.spotify)
-      thisSong.push(body.tracks[i].preview_url)
-      payload[body.tracks[i].name] = thisSong;
+app.post("/recommend", async (req, res) => {
+    console.log(req.body)
+    if (new Date() > expiration) {
+      getAuthToken();
     }
-    res.send({ 'payload': payload })
-  })
+    const { seed , sliders } = req.body;
+    if (!seed) {
+      res.status(400).send("Please select at least one seed before sending a request");
+      return;
+  }
+    let seedQuery = "";
+    if (seed.length > 0) {
+      seedQuery = "seed_tracks=" + seed
+        .filter(s => s.type === "track")
+        .map(s => s.id)
+        .join("%2C") + "&seed_artists=" + seed
+        .filter(s => s.type === "artist")
+        .map(s => s.id)
+        .join("%2C") + "&seed_genres=" + seed
+        .filter(s => s.type === "genre")
+        .map(s => s.name)
+        .join("%2C");
+    }
+  
+    let sliderQuery = "";
+    if (sliders.length > 0) {
+      sliderQuery = "&" + sliders
+        .filter(s => s.hasBeenMoved)
+        .map(s => `target_${s.name}=${s.value}`)
+        .join("&");
+    }
+  
+    const query = 
+      "https://api.spotify.com/v1/recommendations?" +
+      seedQuery +
+      "&limit=6&market=ES" +
+      sliderQuery;
+      let recommend = {
+        url: query,
+        headers: {
+          'Authorization': 'Bearer ' + tempToken
+        },
+        json: true
+      }
+    // Send the constructed query URL to the Spotify API
 
+    
+    request.get(recommend, function (error, response, body) {
+      if (error) {console.log('error retrieving info from spotify') 
+      res.status(500).json({ error: 'Error querying Spotify API' })}
+      else {
+        let payload = {};
+      for (let i = 0; i < body.tracks.length; i++) {
+        let thisSong = [];
+        thisSong.push(body.tracks[i].name);
+        thisSong.push(body.tracks[i].album.images);
+        thisSong.push(body.tracks[i].artists);
+        thisSong.push(body.tracks[i].album.name);
+        thisSong.push(body.tracks[i].album.release_date);
+        thisSong.push(body.tracks[i].external_urls.spotify)
+        thisSong.push(body.tracks[i].preview_url)
+        payload[body.tracks[i].name] = thisSong;
+      }
+      console.log(payload)
+      res.send({ payload });
+      }
+  });
 });
+ 
 app.post('/search', async (req, res) => {
   if (new Date() > expiration) {
     getAuthToken();

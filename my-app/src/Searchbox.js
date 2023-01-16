@@ -5,11 +5,11 @@ import InputGroupGenres from './InputGroupGenres'
 import SearchResults from './SearchResults';
 
 
-const SearchBox = () => {
+const SearchBox = (props) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [searchType, setSearchType] = useState('artist'); // Default search type is artist
-  const [selectedResults, setSelectedResults] = useState([]);
+  // const [selectedResults, setSelectedResults] = useState([]);
   
 
   // Handle search input changes
@@ -37,27 +37,11 @@ const SearchBox = () => {
       console.log(error);
     }
   }
-  const handleResultClick = (result) => {
-    console.log(result)
-    if (result.name == '') return;
-    if (selectedResults.length === 5) {
-      return;
-    }
-    if (result.type === "artist" || result.type === "track") {
-      if (selectedResults.some(res => res.id === result.id)) {
-        return;
-      }
-      setSelectedResults([...selectedResults, result]);
-    }
-    if (result.type === "genre") {
-      setSelectedResults([...selectedResults, result]);
-    }
-  }
 
   return (
-    <div>
-      <Form onSubmit={handleSubmit} className='container mx-auto'>
-        <Row className="align-items-center">
+    <Container className="">
+      <Form onSubmit={handleSubmit} className='container m-0' >
+        <Row className="">
           <Col xs="6">
             <Row>
               <InputGroup>
@@ -74,20 +58,15 @@ const SearchBox = () => {
             <Form.Text id="artistText">Select Up to 5 Total Artist, Tracks, or Genres as Seeds</Form.Text>
           </Col>
           <Col xs="6">
-            <InputGroupGenres handleResultClick={handleResultClick}>
+            <InputGroupGenres handleResultClick={props.handleResultClick}>
             </InputGroupGenres>
           </Col>
         </Row>
       </Form>
-      <SearchResults results={searchResults} handleResultClick={handleResultClick}></SearchResults>
-      <div className="mt-5">
-        <span>Up to 5 Seeds Can Be Selected:</span><Row>
-          {selectedResults.slice(0, 5).map((result, index) => (
-            <Col><span key={index}> {result.name}</span></Col>
-          ))}
-        </Row>
-      </div>
-    </div>
+      <SearchResults results={searchResults} handleResultClick={props.handleResultClick}></SearchResults>
+  
+      
+    </Container>
   );
 }
 export default SearchBox;
