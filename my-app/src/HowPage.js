@@ -4,6 +4,11 @@ import { Accordion } from 'react-bootstrap';
 const HowPage = () => {
   return (
     <>
+
+    <h1 className='text-center'>How?</h1>
+    <div className="m-5">
+      <p>The Spotify API allows you to receive recommendations based on a series of seed Artists and Tracks. up to 5 total, and an incredible array of parameters surrounding their metadata.</p>
+      <p>  This application combines a convenient User Interface for inputting requests with a back-end server that packages the requests and pairs them with an authentication token so that we can receive a response.</p> I think that the seeds are self-explanatory, but the parameters are not.  They are listed below.  Also remember that a parameter that is not set is not added to the query of the Spotify API.</div>
     <Accordion className="m-4">
       <Accordion.Item eventKey="0">
         <Accordion.Header>Acousticness</Accordion.Header>

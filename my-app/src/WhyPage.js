@@ -5,8 +5,8 @@ function WhyPage() {
   return (
     <>
       <Container>
-        <h1>Why Page</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed auctor, nisl a faucibus convallis, augue augue bibendum nulla, id luctus metus magna id neque. In hac habitasse platea dictumst. Sed eget bibendum magna, id tincidunt dolor. Curabitur tempor tellus sit amet ipsum faucibus, in feugiat purus gravida. Sed placerat velit vel velit hendrerit, vel aliquet purus laoreet. Sed condimentum, nulla id convallis tempus, massa velit hendrerit velit, vitae gravida libero velit vel velit. Sed id neque vel velit dictum suscipit. Sed sit amet fringilla velit. Praesent id ipsum augue. Nam placerat magna sit amet tellus blandit, non gravida odio euismod. Sed tempus, risus id aliquet tincidunt, nisl nisl bibendum augue, eget congue risus mi euismod massa. Sed id metus at metus pellentesque dictum. Sed vel tellus vel velit bibendum gravida vel velit.</p>
+        <h1>Why?</h1>
+        <p>Do you remember back when Pandora was still 'the Music Genome Project'?  I do.   I miss being able to find new music based on all kinds of parameters that aren't linked to my personal user ID or 'algorthim'.  It allowed me to get outside of my own musical bubble. As far as I can tell, Spotify is the only music aggregator that has a publicly available API to expose this kind of data. I hope we can all use this app to find a few jams without an algorithm directing us back to what's popular or profitable.</p>
       </Container>
     </>
   );

@@ -18,7 +18,6 @@ function SearchResults(props) {
 
       {results.map((result, index) => {
         return (
-          <CSSTransition in={hoveredResult === result} classNames="highlighted-card" >
           <OverlayTrigger key={result.id}
             placement="top"
             overlay={
@@ -28,7 +27,7 @@ function SearchResults(props) {
             }>
             <Card key={index}
               onMouseEnter={() => handleHover(result)} 
-              onMouseLeave={handleMouseLeave} onClick={() => handleResultClick(result)} className="fade-in">
+              onMouseLeave={handleMouseLeave} onClick={() => handleResultClick(result)} className="hoverable">
               <div className="imageContainer">
               <Image src={result.images[2]? result.images[1].url : '/defaultImage.jpg'} alt={result.name} fluid className="searchImages"/> </div>
               <Card.Body>
@@ -36,7 +35,6 @@ function SearchResults(props) {
               </Card.Body>
             </Card>
           </OverlayTrigger>
-          </CSSTransition>
         )
       })}
     </CardGroup>
