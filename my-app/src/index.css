@@ -44,9 +44,14 @@ code {
   background-color: #ccc;
   border-radius:10px;
 }
+.hoverable{
+  color:black;
+  transform: scale(1.0);
+  transition: transform .3s ease-in
+}
 .hoverable:hover{
-  transform: scale(1.1);
+  transform: scale(1.15);
   z-index: 1;
   color: blue;
-  transition: transform 0.5s ease-in-out;
+  transition: transform .3s ease-in;
 }

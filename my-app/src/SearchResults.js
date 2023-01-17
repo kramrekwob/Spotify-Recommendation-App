@@ -29,7 +29,7 @@ function SearchResults(props) {
               onMouseEnter={() => handleHover(result)} 
               onMouseLeave={handleMouseLeave} onClick={() => handleResultClick(result)} className="hoverable">
               <div className="imageContainer">
-              <Image src={result.images[2]? result.images[2].url : '/defaultImage.jpg'} alt={result.name} fluid className="searchImages"/> </div>
+              <Image src={result.images[1]? result.images[1].url : '/defaultImage.jpg'} alt={result.name} fluid className="searchImages"/> </div>
               <Card.Body>
                 <Card.Title>{result.name}</Card.Title>
               </Card.Body>

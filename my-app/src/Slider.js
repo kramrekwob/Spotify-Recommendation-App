@@ -8,7 +8,7 @@ const Slider = (props) => {
   }
   
   return (
-    <Row className="row m-3">
+    <Col className="col-sm-12 col-md-6 col-lg-4">
       <Form.Label as={Col} htmlFor={props.name} className="border text-center text-bold mt-2">{props.label}</Form.Label>
       <Form.Range as={Col}
         name={props.name}
@@ -22,7 +22,7 @@ const Slider = (props) => {
         onChange={handleChange}
       />
       <Col>{props.value}</Col>
-    </Row>
+    </Col>
   );
 }
 

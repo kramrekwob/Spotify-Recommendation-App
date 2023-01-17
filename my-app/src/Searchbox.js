@@ -36,7 +36,7 @@ const SearchBox = (props) => {
     <Container className="">
       <Form onSubmit={handleSubmit} className='container m-0' >
         <Row className="my-5">
-          <Col xs="6">
+          <Col md="6">
             <Row>
               <InputGroup>
               <DropdownButton title={searchType} value={searchType} onSelect={(value) => setSearchType(value)}>
@@ -50,7 +50,7 @@ const SearchBox = (props) => {
               </InputGroup>
             </Row>
           </Col>
-          <Col xs="6">
+          <Col md="6">
             <InputGroupGenres handleResultClick={props.handleResultClick} className="d-flex align-items-stretch h-100">
             </InputGroupGenres>
           </Col>

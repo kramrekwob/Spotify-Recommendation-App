@@ -9,7 +9,7 @@ const links = [
 const MyNavbar = () => {
   return (
     <Navbar expand="lg" className="py-4 mb-4 navbar-dark" bg="dark">
-      <Navbar.Brand href="#" style={{ paddingLeft: '4%' }}>Spotify Recommendation App</Navbar.Brand>
+      <Navbar.Brand href="/" style={{ paddingLeft: '4%' }}>Spotify Recommendation App</Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
      
       <Navbar.Collapse id="basic-navbar-nav" className='mx-auto justify-content-end'>

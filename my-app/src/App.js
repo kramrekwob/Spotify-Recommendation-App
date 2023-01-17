@@ -86,50 +86,39 @@ function clearStates() {
   </div>
   <div>A</div>
   </Row>
-      <Container className="container" >
-        <Row>
-        <Col>
+      <div className="m-5" >
+        <Row className="justify-content-between">
         <Slider
           name="liveness"
           label="Liveness"
           value={sliders.liveness.value}
           handleSliderChange={handleSliderChange}
         />
-        </Col>
-        <Col>
         <Slider
           name="loudness"
           label="Loudness"
           value={sliders.loudness.value}
           handleSliderChange={handleSliderChange}
         />
-        </Col>
-        <Col>
         <Slider
           name="danceability"
           label="Danceability"
           value={sliders.danceability.value}
          handleSliderChange={handleSliderChange}
         />
-        </Col>
-        </Row>
-        <Row>
-          <Col>
         <Slider
           name="popularity"
           label="Popularity" value={sliders.popularity.value}
           handleSliderChange={handleSliderChange}
         />
-        </Col>
-        <Col>
+        
         <Slider
           name="tempo"
           label="Tempo" value={sliders.tempo.value}
           handleSliderChange={handleSliderChange}
         />
-        </Col>
         </Row>
-      </Container>
+      </div>
       </div> 
       }
       </div>

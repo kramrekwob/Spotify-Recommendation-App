@@ -7,8 +7,8 @@ const HowPage = () => {
 
     <h1 className='text-center'>How?</h1>
     <div className="m-5">
-      <p>The Spotify API allows you to receive recommendations based on a series of seed Artists and Tracks. up to 5 total, and an incredible array of parameters surrounding their metadata.</p>
-      <p>  This application combines a convenient User Interface for inputting requests with a back-end server that packages the requests and pairs them with an authentication token so that we can receive a response.</p> I think that the seeds are self-explanatory, but the parameters are not.  They are listed below.  Also remember that a parameter that is not set is not added to the query of the Spotify API. In other words, if you do not move any of the slider components of the "Advanced Parameters" section, they will not be included in the request.  This is because a midway value for most of the inputs is still opinionated, and will skew the results.  Only alter parameters that you want included in the results.</div>
+      <p>Search seeds and a wide range of parameters are compiled together into a single query and sent to the Spotify API to generate results.</p>
+      <p>  This application combines a convenient User Interface for inputting requests with a back-end server that packages the requests and pairs them with an authentication token and then displays the results and their most relevant information.</p> I think that the seeds are self-explanatory, but the parameters are not.  They are listed below.  Also remember that if a parameter is not moved, then it is not added to the query of the Spotify API. In other words, if you do not move any of the slider components of the "Parameters" section, they will not be included in the request.  A middle value would still be opinionated, so instead the value isn't included at all.  Only alter parameters that you want included in the results.</div>
     <Accordion className="m-4">
       <Accordion.Item eventKey="0">
         <Accordion.Header>Acousticness</Accordion.Header>
