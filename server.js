@@ -9,8 +9,9 @@ app.use(bodyParser.json())
 
 
 app.use(bodyParser.urlencoded({ extended: false }))
-//let it use the public folder
-app.use(express.static(path.join(__dirname, 'build')));
+app.use(express.static("build"));
+
+
 // application requests authorization
 var authOptions = {
   url: 'https://accounts.spotify.com/api/token',
