@@ -14,10 +14,10 @@ const [showResults, setShowResults] = useState(false);
 
 const [sliders, setSliders] = useState({
   liveness: {value: .5, hasBeenMoved: false},
-  loudness: {value: .5, hasBeenMoved: false},
+  loudness: {value: -30, hasBeenMoved: false},
   danceability: {value: .5, hasBeenMoved: false},
-  popularity: {value: .5, hasBeenMoved: false},
-  tempo: {value: .5, hasBeenMoved: false},
+  popularity: {value: 50, hasBeenMoved: false},
+  tempo: {value: 100, hasBeenMoved: false},
 });
 const handleRecommendations = (data) => {
   setRecommendations(data);
@@ -73,7 +73,7 @@ function clearStates() {
   <div className="d-flex flex-row align-items-center justify-content-start">
     {selectedResults.slice(0, 5).map((result, index) => (
       <div className="seed-container d-flex align-items-center mr-3" key={index}>
-        {result.images[2] ? <img src={result.images[2].url} alt={result.name} className="seed-image mr-3" /> : <div className="seed-image mr-3"></div>}
+        {result.images && result.images[2] && result.images[2].url ? <img src={result.images[2].url} alt={result.name} className="seed-image mr-3" /> : <div className="seed-image mr-3"></div>}
         <span>{result.name}</span>
       </div>
     ))}
@@ -84,38 +84,98 @@ function clearStates() {
   <GetRecommendations clearStates={clearStates} handleRecommendations={handleRecommendations} selectedResults={selectedResults} sliders={sliders} handleShowResults={handleShowResults}/>
     <Button variant="warning" onClick={() => clearStates()}>Clear</Button>
   </div>
-  <div>A</div>
+<h2 className="mt-4">Optional Parameters:</h2>
   </Row>
-      <div className="m-5" >
+      <div className="m-3 p-4 border border-2 border-dark" >
         <Row className="justify-content-between">
         <Slider
           name="liveness"
           label="Liveness"
           value={sliders.liveness.value}
           handleSliderChange={handleSliderChange}
+          min={0}
+          max={1}
+          step={.1}
         />
         <Slider
           name="loudness"
-          label="Loudness"
+          label="Loudness (dB)"
           value={sliders.loudness.value}
           handleSliderChange={handleSliderChange}
+          min={-60}
+          max={0}
+          step={.5}
         />
         <Slider
           name="danceability"
           label="Danceability"
           value={sliders.danceability.value}
          handleSliderChange={handleSliderChange}
+         min={0}
+          max={1}
+          step={.1}
         />
         <Slider
           name="popularity"
           label="Popularity" value={sliders.popularity.value}
           handleSliderChange={handleSliderChange}
+          min={0}
+          max={100}
+          step={1}
         />
         
         <Slider
           name="tempo"
-          label="Tempo" value={sliders.tempo.value}
+          label="Tempo (BPM)" value={sliders.tempo.value}
           handleSliderChange={handleSliderChange}
+          min={40}
+          max={160}
+          step={1}
+        />
+         <Slider
+          name="energy"
+          label="Energy"
+          value={sliders.liveness.value}
+          handleSliderChange={handleSliderChange}
+          min={0}
+          max={1}
+          step={.1}
+        />
+         <Slider
+          name="instrumentalness"
+          label="Instrumentalness"
+          value={sliders.liveness.value}
+          handleSliderChange={handleSliderChange}
+          min={0}
+          max={1}
+          step={.1}
+        />
+         <Slider
+          name="speechiness"
+          label="Speechiness"
+          value={sliders.liveness.value}
+          handleSliderChange={handleSliderChange}
+          min={0}
+          max={1}
+          step={.1}
+        />
+         <Slider
+          name="valence"
+          label="Valence"
+          value={sliders.liveness.value}
+          handleSliderChange={handleSliderChange}
+          min={0}
+          max={1}
+          step={.1}
+        />
+         <Slider
+          name="acoustiness"
+          label="Acousticness"
+          value={sliders.liveness.value}
+          handleSliderChange={handleSliderChange}
+          min={0}
+          max={1}
+          step={.1}
         />
         </Row>
       </div>

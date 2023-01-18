@@ -7,19 +7,12 @@ function TrackAnalysis() {
   const [trackData, setTrackData] = useState(null);
   const [searchTerm, setSearchTerm] = useState('')
 
-  const handleSearch = (searchResults) => {
-    // Your code to handle the search results and set the track data
-  };
-
-  const handleTrackAnalysis = () => {
-    // Your code to send a request to the backend "/trackanalysis" endpoint
-    // and update the trackData state with the response
-  };
-  const handleSearchTerm = (e) =>{
+const handleSearchTerm = (e) =>{
     setSearchTerm(e.target.value)
   }
 
-  const handleSubmit = async (e) => {
+const handleTrackAnalysis = async (e) => {
+
     e.preventDefault();
     if (!searchTerm) {
       return;

@@ -27,11 +27,11 @@ var authOptions = {
 //receive access token as body.access_token 
 var tempToken;
 let expiration;
-function getAuthToken() {
-  request.post(authOptions, function (error, response, body) {
+async function getAuthToken() {
+  await request.post(authOptions, function (error, response, body) {
     if (error) console.log('initial authentication error')
     if (!error && response.statusCode === 200) {
-      expiration = new Date().getSeconds + 3600
+      expiration = new Date().getTime() + 3600 * 1000;
       tempToken = body.access_token;
       console.log(tempToken)
       i = tempToken;
@@ -44,7 +44,7 @@ getAuthToken();
 app.post("/recommend", async (req, res) => {
     console.log(req.body)
     if (new Date() > expiration) {
-      getAuthToken();
+      await getAuthToken();
     }
     const { seed , sliders } = req.body;
     if (!seed) {
@@ -112,9 +112,8 @@ app.post("/recommend", async (req, res) => {
  
 app.post('/search', async (req, res) => {
   if (new Date() > expiration) {
-    getAuthToken();
+    await getAuthToken();
   }
-
   console.log(req.body)
   const { searchTerm, searchType } = req.body;
   if (searchTerm == '') { console.log('empty query') }
@@ -132,7 +131,9 @@ app.post('/search', async (req, res) => {
   try {
     // use your access_token and send it with the request
     const response = request.get(search, function (error, response, body) {
-      if (error) {
+
+      console.log(body)
+      if (error || body == '') {
         console.log('error retrieving search info from spotify');
       } else {
         let searchItems;

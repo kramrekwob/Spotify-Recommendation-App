@@ -15,9 +15,9 @@ const Slider = (props) => {
         id={props.name}
         type="range"
         className="form-range col-6 parameter"
-        min={0}
-        max={1}
-        step={.01}
+        min={props.min}
+        max={props.max}
+        step={props.step}
         value={props.value}
         onChange={handleChange}
       />

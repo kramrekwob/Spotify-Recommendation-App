@@ -7,12 +7,6 @@ function SearchResults(props) {
   const { results, handleResultClick } = props;
   const [hoveredResult, setHoveredResult] = useState(null);
 
-  const handleHover = (result) => {
-    setHoveredResult(result);
-  }
-  const handleMouseLeave = () => {
-    setHoveredResult(null);
-    };
   return (
     <CardGroup className="my-3">
 
@@ -25,9 +19,7 @@ function SearchResults(props) {
                 {result.name}
               </Tooltip>
             }>
-            <Card key={index}
-              onMouseEnter={() => handleHover(result)} 
-              onMouseLeave={handleMouseLeave} onClick={() => handleResultClick(result)} className="hoverable">
+            <Card key={index} onClick={() => handleResultClick(result)} className="hoverable">
               <div className="imageContainer">
               <Image src={result.images[1]? result.images[1].url : '/defaultImage.jpg'} alt={result.name} fluid className="searchImages"/> </div>
               <Card.Body>
