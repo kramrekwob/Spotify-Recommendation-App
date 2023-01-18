@@ -7,8 +7,8 @@ const Code = () => {
     <Container fluid>
     <h1 className='text-center'>Code</h1>
     <div className="m-5">
-      <p>Search seeds and a wide range of parameters are compiled together into a single query and sent to the Spotify API to generate results.</p>
-      <p>  This application combines a convenient User Interface for inputting requests with a back-end server that packages the requests and pairs them with an authentication token and then displays the results and their most relevant information.</p> I think that the seeds are self-explanatory, but the parameters are not.  They are listed below.  Also remember that if a parameter is not moved, then it is not added to the query of the Spotify API. In other words, if you do not move any of the slider components of the "Parameters" section, they will not be included in the request.  A middle value would still be opinionated, so instead the value isn't included at all.  Only alter parameters that you want included in the results.</div>
+      <p>  This application combines a convenient User Interface for inputting requests with a back-end server that packages the requests and pairs them with an authentication token and displays the results</p>
+      <p>The front end is React and Bootstrap, the back end is Node and Express. Next up is a pipeline for building and testing from Github instead of manual builds. Deployment is automated from Github to Railway</p></div>
     <Accordion className="m-4">
     <Accordion.Item eventKey="0">
         <Accordion.Header>Spotify API</Accordion.Header>
