@@ -7,8 +7,9 @@ const HowPage = () => {
 
     <h1 className='text-center'>How?</h1>
     <div className="m-5">
-      <p>Search seeds and a wide range of parameters are compiled together into a single query and sent to the Spotify API to generate results.</p>
-      <p>  This application combines a convenient User Interface for inputting requests with a back-end server that packages the requests and pairs them with an authentication token and then displays the results and their most relevant information.</p> I think that the seeds are self-explanatory, but the parameters are not.  They are listed below.  Also remember that if a parameter is not moved, then it is not added to the query of the Spotify API. In other words, if you do not move any of the slider components of the "Parameters" section, they will not be included in the request.  A middle value would still be opinionated, so instead the value isn't included at all.  Only alter parameters that you want included in the results.</div>
+      <p>A "Seed" is like when you click "Go to Radio" on a track, album, or artist.  It takes the details of the song and uses the algorithm to populate the top tracks. The API allows up to 5 seeds to be used to receive recommendations.  Think of it like starting a playlist and spotify picks the next few tracks.</p>
+       <p> The parameters are listed below, their names and values are not self-explanatory. Remember that if a parameter is not moved, then it is not added to the query of the Spotify API. In other words, if you do not move any of the slider components of the "Optional Parameters" section, the request will only be based on the seeds.  Since a middle value would still be opinionated, they are ommitted.  Only alter parameters that you want included in the results.</p>
+       </div>
     <Accordion className="m-4">
       <Accordion.Item eventKey="0">
         <Accordion.Header>Acousticness</Accordion.Header>

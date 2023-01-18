@@ -89,7 +89,7 @@ function InputGroupGenres({ handleResultClick }) {
                                 {genre}
                             </option>
                         ))} </Form.Select>
-                    <Button onClick={handleSubmit}>Add Seed</Button>
+                    <Button onClick={handleSubmit} >Add Seed</Button>
                 </InputGroup>
     )
 };

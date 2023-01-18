@@ -7,6 +7,7 @@ import SearchResults from './SearchResults';
 const SearchBox = (props) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
+  const [hasSearched, setHasSearched] = useState(false);;
   const [searchType, setSearchType] = useState('artist'); // Default search type is artist
   // const [selectedResults, setSelectedResults] = useState([]);
   
@@ -19,7 +20,8 @@ const SearchBox = (props) => {
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-    searchTerm.trim()
+    searchTerm.trim();
+    setHasSearched(true);
     if (!searchTerm) {
       return;
     }
@@ -56,7 +58,7 @@ const SearchBox = (props) => {
           </Col>
         </Row>
       </Form>
-      <SearchResults results={searchResults} handleResultClick={props.handleResultClick}></SearchResults>
+      <SearchResults results={searchResults} handleResultClick={props.handleResultClick} ></SearchResults>
   
       
     </Container>

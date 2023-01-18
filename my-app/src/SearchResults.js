@@ -1,12 +1,9 @@
 import React, { useState } from 'react';
-import { Card, CardGroup, Image, OverlayTrigger, Tooltip, Row, Container} from 'react-bootstrap';
-import { CSSTransition } from 'react-transition-group';
-
+import { Card, CardGroup, Image, OverlayTrigger, Tooltip, Row, Container } from 'react-bootstrap';
 
 function SearchResults(props) {
   const { results, handleResultClick } = props;
-  const [hoveredResult, setHoveredResult] = useState(null);
-
+  console.log(results)
   return (
     <CardGroup className="my-3">
       <Container>
@@ -25,6 +22,13 @@ function SearchResults(props) {
               <Image src={result.images[1]? result.images[1].url : '/defaultImage.jpg'} alt={result.name} fluid className="searchImages"/> </div>
               <Card.Body>
                 <Card.Title>{result.name}</Card.Title>
+                <Card.Subtitle>{ result.type === "track" ? 
+    (result.artist.length > 1
+        ? "Artists: " + result.artist.map((artist, index) => artist.name).join(", ")
+        : "Artist: " + result.artist[0].name) 
+    : ""
+}
+    </Card.Subtitle>
               </Card.Body>
             </Card>
           </OverlayTrigger>
@@ -33,7 +37,7 @@ function SearchResults(props) {
       </Row>
       </Container>
     </CardGroup>
-    
+
   )
 }
 export default SearchResults

@@ -8,6 +8,8 @@ import { BrowserRouter, Route, Routes} from 'react-router-dom';
 import HowPage from './HowPage';
 import WhyPage from './WhyPage';
 import MyNavbar from './MyNavbar';
+import TrackAnalysisPage from './TrackAnalysisPage';
+import Code from './Code'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -18,6 +20,8 @@ root.render(
       <Route exact path="/" element={<App />} />
       <Route path="/how" element={<HowPage />} />
       <Route path="/why" element={<WhyPage />} />
+      <Route path="/code" element={<Code />} />
+      <Route path="/analyze" element={<TrackAnalysisPage />} />
       </Routes>
   </BrowserRouter>
   </React.StrictMode>

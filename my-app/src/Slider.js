@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Row, Col } from 'react-bootstrap';
+import { Form, Col } from 'react-bootstrap';
 
 const Slider = (props) => {
 
@@ -8,8 +8,8 @@ const Slider = (props) => {
   }
   
   return (
-    <Col className="col-sm-12 col-md-6 col-lg-4">
-      <Form.Label as={Col} htmlFor={props.name} className="border text-center text-bold mt-2">{props.label}</Form.Label>
+    <Col className="col-12 col-sm-6 col-md-4">
+      <Form.Label as={Col} htmlFor={props.name} className="border text-center text-bold mt-2 bg-dark text-light">{props.label}</Form.Label>
       <Form.Range as={Col}
         name={props.name}
         id={props.name}

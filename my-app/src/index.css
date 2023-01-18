@@ -55,3 +55,15 @@ code {
   color: blue;
   transition: transform .3s ease-in;
 }
+.progress{
+  height: 40px !important;
+}
+.progress-bar{
+  font-size:18px;
+  line-height:50px;
+}
+.progress-span{
+  position: relative;
+  left: 100%;
+  top:10%;
+}

@@ -4,15 +4,11 @@ var request = require('request'); // "Request" librarynpm
 require("dotenv").config({ path: "./config/.env" })
 const bodyParser = require("body-parser");
 const app = express();
-
 app.use(bodyParser.json())
-
-
 app.use(bodyParser.urlencoded({ extended: false }))
-app.use(express.static("build"));
+app.use(express.static("build")); //serves the most recent React Build.  I should create a Github action to build and deploy automatically.
 
-
-// application requests authorization
+// On startup, Application requests authorization
 var authOptions = {
   url: 'https://accounts.spotify.com/api/token',
   headers: {
@@ -23,7 +19,7 @@ var authOptions = {
   },
   json: true
 };
-//receive access token as body.access_token 
+//receive access token as body.access_token, store for later, and establish an expiration date that will expire in 1 hour (but do not refresh until a request is made)
 var tempToken;
 let expiration;
 async function getAuthToken() {
@@ -39,60 +35,60 @@ async function getAuthToken() {
 }
 getAuthToken();
 
-
 app.post("/recommend", async (req, res) => {
-    console.log(req.body)
-    if (new Date() > expiration) {
-      await getAuthToken();
-    }
-    const { seed , sliders } = req.body;
-    if (!seed) {
-      res.status(400).send("Please select at least one seed before sending a request");
-      return;
+  //Only when necessary, refresh the authToken
+  if (new Date() > expiration) {
+    await getAuthToken();
   }
-    let seedQuery = "";
-    if (seed.length > 0) {
-      seedQuery = "seed_tracks=" + seed
-        .filter(s => s.type === "track")
-        .map(s => s.id)
-        .join("%2C") + "&seed_artists=" + seed
+  const { seed, sliders } = req.body;
+  if (!seed) {
+    res.status(400).send("Please select at least one seed before sending a request");
+    return;
+  }
+  let seedQuery = "";
+  if (seed.length > 0) {
+    seedQuery = "seed_tracks=" + seed
+      .filter(s => s.type === "track")
+      .map(s => s.id)
+      .join("%2C") + "&seed_artists=" + seed
         .filter(s => s.type === "artist")
         .map(s => s.id)
         .join("%2C") + "&seed_genres=" + seed
-        .filter(s => s.type === "genre")
-        .map(s => s.name)
-        .join("%2C");
-    }
-  
-    let sliderQuery = "";
-    if (sliders.length > 0) {
-      sliderQuery = "&" + sliders
-        .filter(s => s.hasBeenMoved)
-        .map(s => `target_${s.name}=${s.value}`)
-        .join("&");
-    }
-  
-    const query = 
-      "https://api.spotify.com/v1/recommendations?" +
-      seedQuery +
-      "&limit=12&market=ES" +
-      sliderQuery;
-      let recommend = {
-        url: query,
-        headers: {
-          'Authorization': 'Bearer ' + tempToken
-        },
-        json: true
-      }
-    // Send the constructed query URL to the Spotify API
+          .filter(s => s.type === "genre")
+          .map(s => s.name)
+          .join("%2C");
+  }
+  let sliderQuery = "";
+  if (sliders.length > 0) {
+    sliderQuery = "&" + sliders
+      .filter(s => s.hasBeenMoved)
+      .map(s => `target_${s.name}=${s.value}`)
+      .join("&");
+  }
 
-    
-    request.get(recommend, function (error, response, body) {
-      if (error) {console.log('error retrieving info from spotify') 
-      res.status(500).json({ error: 'Error querying Spotify API' })}
-      else {
-        let payload = {};
+  const query =
+    "https://api.spotify.com/v1/recommendations?" +
+    seedQuery +
+    "&limit=12&market=ES" +
+    sliderQuery;
+  let recommend = {
+    url: query,
+    headers: {
+      'Authorization': 'Bearer ' + tempToken
+    },
+    json: true
+  }
+  // Send the constructed query URL to the Spotify API
+  console.log(query)
+  request.get(recommend, function (error, response, body) {
+    if (error) {
+      console.log('error retrieving info from spotify')
+      res.status(500).json({ error: 'Error querying Spotify API' })
+    }
+    else {
+      let payload = {};
       for (let i = 0; i < body.tracks.length; i++) {
+        //package the relevant information for the client
         let thisSong = [];
         thisSong.push(body.tracks[i].name);
         thisSong.push(body.tracks[i].album.images);
@@ -103,11 +99,11 @@ app.post("/recommend", async (req, res) => {
         thisSong.push(body.tracks[i].preview_url)
         payload[body.tracks[i].name] = thisSong;
       }
-      res.send({payload});
-      }
+      res.send({ payload });
+    }
   });
 });
- 
+//searching for a Track or Artist seed works much like the recommendation function, checking for a fresh authtoken, querying the API, and packaging results.
 app.post('/search', async (req, res) => {
   if (new Date() > expiration) {
     await getAuthToken();
@@ -134,7 +130,6 @@ app.post('/search', async (req, res) => {
         let searchItems;
         if (searchType === 'artist') {
           searchItems = body.artists.items;
-          console.log(searchItems)
         } else if (searchType === 'track') {
           searchItems = body.tracks.items.map(item => {
             return {
@@ -145,14 +140,54 @@ app.post('/search', async (req, res) => {
               artist: item.artists
             }
           });
-          console.log(searchItems)
         }
+        //just to see what is being searched
+        console.log(searchItems.map(item => item.name))
         res.json(searchItems);
       }
     });
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Error getting data from Spotify API" });
+  }
+});
+//Analyzing Track Features for a specific song
+app.post('/trackanalysis', async (req, res) => {
+  if (new Date() > expiration) {
+    await getAuthToken();
+  }
+  const { id } = req.body;
+  let trackAnalysis = {
+    url: `https://api.spotify.com/v1/audio-features/${id}`,
+    headers: { 'Authorization': 'Bearer ' + tempToken },
+    json: true
+  }
+  //need to pull popularity, and a fresh large image and name/other details from a separate request
+  let trackInfo = {
+    url: `https://api.spotify.com/v1/tracks/${id}`,
+    headers: { 'Authorization': 'Bearer ' + tempToken },
+    json: true
+  }
+
+  try {
+    request.get(trackAnalysis, (error, response, trackRes) => {
+      if (error) { console.log('error with the track analysis request', error) }
+      request.get(trackInfo, (error2, response2, trackInfoRes) => {
+        if (error2) { console.log('error with the track info request', error2) }
+        else {
+          let trackData = {
+            analysis: trackRes,
+            name: trackInfoRes.name,
+            albumArt: trackInfoRes.album.images[0].url,
+            popularity: trackInfoRes.popularity
+          }
+          res.json(trackData)
+        }
+      })
+    })
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ message: 'Error getting track analysis data' });
   }
 });
 
