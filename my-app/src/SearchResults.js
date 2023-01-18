@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Card, CardGroup, Image, OverlayTrigger, Tooltip } from 'react-bootstrap';
+import { Card, CardGroup, Image, OverlayTrigger, Tooltip, Row, Container} from 'react-bootstrap';
 import { CSSTransition } from 'react-transition-group';
 
 
@@ -9,7 +9,8 @@ function SearchResults(props) {
 
   return (
     <CardGroup className="my-3">
-
+      <Container>
+      <Row>
       {results.map((result, index) => {
         return (
           <OverlayTrigger key={result.id}
@@ -19,7 +20,7 @@ function SearchResults(props) {
                 {result.name}
               </Tooltip>
             }>
-            <Card key={index} onClick={() => handleResultClick(result)} className="hoverable">
+            <Card key={index} onClick={() => handleResultClick(result)} className="hoverable col-sm-6 col-md-2">
               <div className="imageContainer">
               <Image src={result.images[1]? result.images[1].url : '/defaultImage.jpg'} alt={result.name} fluid className="searchImages"/> </div>
               <Card.Body>
@@ -29,7 +30,10 @@ function SearchResults(props) {
           </OverlayTrigger>
         )
       })}
+      </Row>
+      </Container>
     </CardGroup>
+    
   )
 }
 export default SearchResults

@@ -2,7 +2,6 @@ import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import {Link} from 'react-router-dom'
 
 const links = [
-  {name: 'Home', path: '/'},
   {name: 'How', path: '/how'},
   {name: 'Why', path: '/why'},
  ] ;
@@ -17,9 +16,6 @@ const MyNavbar = () => {
         {links.map(link => (
   <Nav.Link as={Link} to={link.path} key={link.name}>{link.name}</Nav.Link>
 ))}
-          <NavDropdown title="More" id="basic-nav-dropdown">
-            <NavDropdown.Item href="#">Back to Recommendations</NavDropdown.Item>
-          </NavDropdown>
         </Nav>
       </Navbar.Collapse>
      

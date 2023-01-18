@@ -10,10 +10,10 @@ function ResultsCards({ handleShowInitialScreen, recommendations }) {
     return (
         <div>
             <Button onClick={handleShowInitialScreen}>Search Again</Button>
-            <div className="card-container" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, fr))', gridGap: '1px' }}>
+            <div className="card-container m-2 d-flex flex-wrap justify-content-center">
 
                 {recommendations && Object.values(recommendations).map((song, index) => (
-                    <Card className="m-1" key={index}>
+                    <Card className="col-sm-6 col-md-4 col-lg-3" key={index}>
                         <Image topwidth="100%" src={song[1][0] ? song[1][0].url : '/defaultImage.jpg'} alt="Card image cap" />
                         <Card.Body>
                             <Card.Title>{song[0]}</Card.Title>

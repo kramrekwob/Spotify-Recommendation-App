@@ -103,7 +103,6 @@ app.post("/recommend", async (req, res) => {
         thisSong.push(body.tracks[i].preview_url)
         payload[body.tracks[i].name] = thisSong;
       }
-      console.log(payload)
       res.send({payload});
       }
   });
@@ -113,14 +112,13 @@ app.post('/search', async (req, res) => {
   if (new Date() > expiration) {
     await getAuthToken();
   }
-  console.log(req.body)
   const { searchTerm, searchType } = req.body;
   if (searchTerm == '') { console.log('empty query') }
   let endpoint = '';
   if (searchType === 'artist') {
-    endpoint = 'https://api.spotify.com/v1/search?q=' + searchTerm + '&type=artist&limit=5';
+    endpoint = 'https://api.spotify.com/v1/search?q=' + searchTerm + '&type=artist&limit=6';
   } else if (searchType === 'track') {
-    endpoint = 'https://api.spotify.com/v1/search?q=' + searchTerm + '&type=track&limit=5';
+    endpoint = 'https://api.spotify.com/v1/search?q=' + searchTerm + '&type=track&limit=6';
   }
   let search = {
     url: endpoint,
@@ -130,8 +128,6 @@ app.post('/search', async (req, res) => {
   try {
     // use your access_token and send it with the request
     const response = request.get(search, function (error, response, body) {
-
-      console.log(body)
       if (error || body == '') {
         console.log('error retrieving search info from spotify');
       } else {
