@@ -75,7 +75,7 @@ app.post("/recommend", async (req, res) => {
     const query = 
       "https://api.spotify.com/v1/recommendations?" +
       seedQuery +
-      "&limit=6&market=ES" +
+      "&limit=12&market=ES" +
       sliderQuery;
       let recommend = {
         url: query,
