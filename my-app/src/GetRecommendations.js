@@ -12,6 +12,7 @@ function GetRecommendations(props) {
         } else
         try {
             //This removes all the sliders that weren't touched.
+            console.log(props.sliders)
             const filteredParams = Object.entries(props.sliders)
             .filter(([, {hasBeenMoved}]) => hasBeenMoved)
             .map(([name, {value}]) => ({name, value}));

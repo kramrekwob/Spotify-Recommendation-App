@@ -18,11 +18,12 @@ const [sliders, setSliders] = useState({
   danceability: {value: .5, hasBeenMoved: false},
   popularity: {value: 50, hasBeenMoved: false},
   tempo: {value: 100, hasBeenMoved: false},
+  energy: {value: .5, hasBeenMoved: false},
   instrumentalness: {value: .5, hasBeenMoved: false},
   speechiness: {value: .5, hasbeenMoved: false},
   valence: {value: .5, hasBeenMoved: false},
   acousticness: {value: .5, hasBeenMoved: false},
-  energy: {value: .5, hasBeenMoved:false}
+
 });
 const handleRecommendations = (data) => {
   setRecommendations(data);
@@ -64,6 +65,11 @@ function clearStates() {
     danceability: {value: .5, hasBeenMoved: false},
     popularity: {value: .5, hasBeenMoved: false},
     tempo: {value: .5, hasBeenMoved: false},
+    instrumentalness: {value: .5, hasBeenMoved: false},
+  speechiness: {value: .5, hasbeenMoved: false},
+  valence: {value: .5, hasBeenMoved: false},
+  acousticness: {value: .5, hasBeenMoved: false},
+  energy: {value: .5, hasBeenMoved: false}
   });
 }
 
@@ -176,7 +182,7 @@ function clearStates() {
           step={.01}
         />
          <Slider
-          name="acoustiness"
+          name="acousticness"
           label="Acousticness"
           value={sliders.acousticness.value}
           handleSliderChange={handleSliderChange}
