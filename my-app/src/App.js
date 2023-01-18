@@ -61,10 +61,10 @@ function clearStates() {
   setSelectedResults([]);
   setSliders({
     liveness: {value: .5, hasBeenMoved: false},
-    loudness: {value: .5, hasBeenMoved: false},
+    loudness: {value: -20, hasBeenMoved: false},
     danceability: {value: .5, hasBeenMoved: false},
-    popularity: {value: .5, hasBeenMoved: false},
-    tempo: {value: .5, hasBeenMoved: false},
+    popularity: {value: 50, hasBeenMoved: false},
+    tempo: {value: 80, hasBeenMoved: false},
     instrumentalness: {value: .5, hasBeenMoved: false},
   speechiness: {value: .5, hasbeenMoved: false},
   valence: {value: .5, hasBeenMoved: false},
