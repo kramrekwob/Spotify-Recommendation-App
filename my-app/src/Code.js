@@ -7,14 +7,14 @@ const Code = () => {
     <Container fluid>
     <h1 className='text-center'>Code</h1>
     <div className="m-5">
-      <p>  This application combines a convenient User Interface for inputting requests with a back-end server that packages the requests and pairs them with an authentication token and displays the results</p>
-      <p>The front end is React and Bootstrap, the back end is Node and Express. Next up is a pipeline for building and testing from Github instead of manual builds. Deployment is automated from Github to Railway</p></div>
+      <p>The code repository can be found <a href="https://github.com/kramrekwob">Here</a>. This application combines a convenient User Interface for inputting requests with a server to package the requests and pair them with an authentication token and display the results.</p>
+      <p>The front end is React and Bootstrap, the back end is Node and Express. Next up is a pipeline for building and testing from Github instead of manual builds. Deployment is automated from Github to Railway.</p></div>
     <Accordion className="m-4">
     <Accordion.Item eventKey="0">
         <Accordion.Header>Spotify API</Accordion.Header>
         <Accordion.Body>
         <p>
-        The Spotify API docs are linked <a href="https://developer.spotify.com/documentation/web-api/"> Here</a>.  They require an authentication token which expires hourly in order to make requests. Because I need to generate new temporary authentication tokens, and I don't want my personal API keys exposed, I had to create a backend server to handle requests rather than query the API directly from the front end.  </p>
+        The Spotify API docs are linked <a href="https://developer.spotify.com/documentation/web-api/"> Here</a>.  They require an authentication token which expires hourly in order to make requests. Because I need to generate new temporary authentication tokens, and I don't want my personal API keys exposed, I had to create a backend server to handle requests rather than query the API directly from the front end.</p>
         <p> I make use of four of the endpoints: <ul><li>Search for Item endpoint for tracks and artists</li><li>Get Recommendations endpoint to generate the results</li>
         <li>Get Track's Audio Features endpoint for track analysis</li>
         <li>Get Track because popularity is not included in the audio features</li></ul></p>

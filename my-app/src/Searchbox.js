@@ -37,7 +37,7 @@ const SearchBox = (props) => {
   return (
     <Container className="">
       <Form onSubmit={handleSubmit} className='container m-0' >
-        <Row className="my-5">
+        <Row className="my-3">
           <Col md="6">
             <Row>
               <InputGroup>

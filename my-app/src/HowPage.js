@@ -7,8 +7,8 @@ const HowPage = () => {
 
     <h1 className='text-center'>How?</h1>
     <div className="m-5">
-      <p>A "Seed" is like when you click "Go to Radio" on a track, album, or artist.  It takes the details of the song and uses the algorithm to populate the top tracks. The API allows up to 5 seeds to be used to receive recommendations.  Think of it like starting a playlist and spotify picks the next few tracks.</p>
-       <p> The parameters are listed below, their names and values are not self-explanatory. Remember that if a parameter is not moved, then it is not added to the query of the Spotify API. In other words, if you do not move any of the slider components of the "Optional Parameters" section, the request will only be based on the seeds.  Since a middle value would still be opinionated, they are ommitted.  Only alter parameters that you want included in the results.</p>
+      <p>A "Seed" is like when you click "Go to Radio" on a track, album, or artist. The Spotify API allows up to 5 seeds to be used to generate recommendations. It then takes the details of these seeds and uses an algorithm to populate the top tracks. Think of it like starting a playlist and spotify picks the next few tracks.</p>
+       <p> The parameters are listed below, their names and values were not self-explanatory for me. Remember that if a parameter is not moved, then it is not added to the query of the Spotify API. In other words, if you do not move any of the slider components of the "Optional Parameters" section, the request will only be based on the seeds.  Since a middle value would still be opinionated, they are ommitted.  Only alter parameters that you want included in the results.</p>
        </div>
     <Accordion className="m-4">
       <Accordion.Item eventKey="0">
@@ -45,7 +45,7 @@ const HowPage = () => {
         <Accordion.Header>Loudness</Accordion.Header>
         <Accordion.Body>
         The overall loudness of a track in decibels (dB). Loudness values are averaged across the entire track and are useful for comparing relative loudness of tracks. Loudness is the quality of a sound that is the primary psychological correlate of physical strength (amplitude). Values typical range between -60 and 0 db.
-        -That's the official description.  I use -60 to 0.
+        -That's the official description.  I use -60 to 0 because that's what the documentation says, but I haven't seen any tracks near the bottom of that range. 
         </Accordion.Body>
       </Accordion.Item>  
         <Accordion.Item eventKey="6">
@@ -63,7 +63,7 @@ const HowPage = () => {
       <Accordion.Item eventKey="8">
         <Accordion.Header>Tempo</Accordion.Header>
         <Accordion.Body>
-        The overall estimated tempo of a track in beats per minute (BPM). In musical terminology, tempo is the speed or pace of a given piece and derives directly from the average beat duration.
+        The overall estimated tempo of a track in beats per minute (BPM). In musical terminology, tempo is the speed or pace of a given piece and derives directly from the average beat duration. I use 60 to 180 BPM as my minimum and maximum.
         </Accordion.Body>
       </Accordion.Item>
       <Accordion.Item eventKey="9">

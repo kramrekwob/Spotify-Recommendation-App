@@ -1,4 +1,4 @@
-import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
+import { Navbar, Nav } from 'react-bootstrap';
 import {Link} from 'react-router-dom'
 
 const links = [
@@ -10,7 +10,7 @@ const links = [
 const MyNavbar = () => {
   return (
     <Navbar expand="lg" className="py-4 mb-4 navbar-dark" bg="dark">
-      <Navbar.Brand href="/" style={{ paddingLeft: '4%' }}>SoundSuggester: The Music Recommendation Engine</Navbar.Brand>
+      <Navbar.Brand href="/" style={{ paddingLeft: '4%'}}>SoundSuggester</Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav" className='justify-content-end px-5'>
         <Nav>

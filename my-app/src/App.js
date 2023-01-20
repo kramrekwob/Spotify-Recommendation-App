@@ -78,9 +78,10 @@ function App() {
       <div className="App" style={{ transition: 'all 0.5s ease-in-out' }}>
         {showResults ? <ResultsCards recommendations={recommendations} handleShowInitialScreen={handleShowInitialScreen}></ResultsCards> :
           <div>
+            <p className="first">First Select up to 5 Artists, Tracks, or Genres:</p>
             <SearchBox handleResultClick={handleResultClick} className="container flex" />
             <div className="d-flex container justify-content-between align-items-center border border-primary">
-              <div className="seed-header">Up to 5 Seeds Can Be Selected:</div>
+              <div className="seed-header">Selections:</div>
               <div className="d-flex flex-row align-items-center justify-content-start">
                 {selectedResults.slice(0, 5).map((result, index) => (
                   <div className="seed-container d-flex align-items-center mr-3" key={index}>
@@ -141,8 +142,8 @@ function App() {
                   label="Tempo (BPM)"
                   value={sliders.tempo.value}
                   handleSliderChange={handleSliderChange}
-                  min={40}
-                  max={160}
+                  min={60}
+                  max={180}
                   step={1}
                 />
                 <Slider

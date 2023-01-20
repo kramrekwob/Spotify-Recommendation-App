@@ -36,22 +36,24 @@ function TrackAnalysisPage() {
   return (
     <>
     <div className="mx-5">
-      <InputGroup className="mb-3">
-        <Form.Control
-          placeholder="Search for a track"
-          aria-label="Search for a track"
-          aria-describedby="basic-addon2"
-          value={searchTerm}
-          onChange={e => setSearchTerm(e.target.value)}
-        />
-        <Button type="submit" variant="outline-secondary" onClick={handleSubmit}>Search</Button>
-      </InputGroup>
+    <Form onSubmit={handleSubmit}>
+  <InputGroup className="mb-3">
+    <Form.Control
+      placeholder="Search for a track"
+      aria-label="Search for a track"
+      aria-describedby="basic-addon2"
+      value={searchTerm}
+      onChange={e => setSearchTerm(e.target.value)}
+    />
+    <Button type="submit" variant="outline-secondary">Search</Button>
+  </InputGroup>
+</Form>
       </div>
       <CardGroup className="m-5">
         <Row>
           {trackSearchResults.map((result, index) => {
             return (
-              <Card key={index} onClick={() => handleTrackAnalysis(result)} className="hoverable col-sm-6 col-md-2">
+              <Card key={index} onClick={() => handleTrackAnalysis(result)} className="hoverable col-6 col-md-2">
                 <Image variant="top" src={result.images[1] ? result.images[1].url : '/defaultImage.jpg'} alt={result.name} fluid className="searchImages" />
                 <Card.Body>
                   <Card.Title>{result.name}</Card.Title>

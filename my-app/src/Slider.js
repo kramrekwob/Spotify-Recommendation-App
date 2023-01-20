@@ -8,7 +8,7 @@ const Slider = (props) => {
   }
   
   return (
-    <Col className="col-12 col-sm-6 col-md-4">
+    <Col className="col-6 col-md-4">
       <Form.Label as={Col} htmlFor={props.name} className="border text-center text-bold mt-2 bg-dark text-light">{props.label}</Form.Label>
       <Form.Range as={Col}
         name={props.name}

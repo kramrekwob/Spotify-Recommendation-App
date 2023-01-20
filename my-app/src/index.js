@@ -9,7 +9,8 @@ import HowPage from './HowPage';
 import WhyPage from './WhyPage';
 import MyNavbar from './MyNavbar';
 import TrackAnalysisPage from './TrackAnalysisPage';
-import Code from './Code'
+import Code from './Code';
+import Footer from './Footer';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -24,6 +25,7 @@ root.render(
       <Route path="/analyze" element={<TrackAnalysisPage />} />
       </Routes>
   </BrowserRouter>
+  <Footer></Footer>
   </React.StrictMode>
 );
 
