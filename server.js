@@ -131,6 +131,10 @@ app.post('/search', async (req, res) => {
         if (searchType === 'artist') {
           searchItems = body.artists.items;
         } else if (searchType === 'track') {
+          if (!body || !body.tracks || !body.tracks.items || body.tracks.items.length === 0) {
+            console.log("Error: The search did not return any results or the format of the response was not as expected.")
+            return res.status(400).json({error: "The search did not return any results or the format of the response was not as expected."});
+          }
           searchItems = body.tracks.items.map(item => {
             return {
               id: item.id,
