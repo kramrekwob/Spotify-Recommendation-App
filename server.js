@@ -58,10 +58,10 @@ app.post("/recommend", async (req, res) => {
           .map(s => s.name)
           .join("%2C");
   }
+  console.log(sliders)
   let sliderQuery = "";
   if (sliders.length > 0) {
     sliderQuery = "&" + sliders
-      .filter(s => s.hasBeenMoved)
       .map(s => `target_${s.name}=${s.value}`)
       .join("&");
   }
